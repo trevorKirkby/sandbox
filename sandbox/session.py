@@ -1,6 +1,7 @@
 class Session:
-    def __init__(self,fs,home):
+    def __init__(self,fs,name,home):
         self.fs = fs
+        self.name = name
         self.home = home
         self.pwd = home
     # here we emulate a shell session
@@ -16,7 +17,7 @@ class Session:
                 if handler:
                     handler(argv)
                 else:
-                    print '%s: command not found.' % argv[0]
+                    print '%s: %s: command not found.' % (self.name,argv[0])
             except KeyboardInterrupt:
                 print
     # command handlers go here
@@ -29,3 +30,5 @@ class Session:
         for child in self.pwd.children:
             print ('%-16s' % child.name),
         print
+    def whoami_handler(self,argv):
+        print 'seriously??'

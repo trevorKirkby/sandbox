@@ -18,5 +18,5 @@ users.add(ryan)
 c = fs.File('c.txt','Here I am!')
 ryan.add(c)
 
-s = sandbox.session.Session(sbox,trevor)
+s = sandbox.session.Session(sbox,'mash',trevor)
 s.shell('> ')
