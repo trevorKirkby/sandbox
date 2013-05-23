@@ -12,6 +12,8 @@ class Session:
                 cmdline = raw_input(prompt)
                 # Break the command line into an argv list
                 argv = cmdline.split()
+                if len(argv) == 0:
+                    continue
                 # Look for a handler that matches argv[0]
                 handler = getattr(self,argv[0]+'_handler',None)
                 if handler:
@@ -24,11 +26,25 @@ class Session:
     def exit_handler(self,argv):
         print 'exit'
         raise SystemExit
+
     def pwd_handler(self,argv):
         print '/'.join(self.pwd.abspath())
+
     def ls_handler(self,argv):
         for child in self.pwd.children:
             print ('%-16s' % child.name),
         print
+
     def whoami_handler(self,argv):
         print 'seriously??'
+
+'''
+    def goto_handler(self,argv):
+        realDirectory = False
+        for item in self.pwd.children:
+            if item == argv[1]:
+                self.pwd = item
+                realDirectory = True
+        if realDirectory == False:
+            print name, "goto:", argv[1], "no such file or directory",
+'''
