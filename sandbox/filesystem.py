@@ -82,11 +82,7 @@ class Path:
 class Filesystem(Directory):
     def __init__(self):
         Directory.__init__(self,'')
-    def isDir(self):
-        return True
 
 class World(Directory):
     def __init__(self,name):
         Directory.__init__(self,name)
-    def isDir(self):
-        return True
