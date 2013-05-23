@@ -38,13 +38,13 @@ class Session:
     def whoami_handler(self,argv):
         print 'seriously??'
 
-'''
     def goto_handler(self,argv):
+        print argv
         realDirectory = False
         for item in self.pwd.children:
-            if item == argv[1]:
+            print item.name
+            if item.name == argv[1]:
                 self.pwd = item
                 realDirectory = True
         if realDirectory == False:
-            print name, "goto:", argv[1], "no such file or directory",
-'''
+            print self.name, ": goto:", argv[1], "no such file or directory"
