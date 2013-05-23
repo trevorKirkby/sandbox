@@ -22,6 +22,8 @@ class Session:
                     print '%s: %s: command not found.' % (self.name,argv[0])
             except KeyboardInterrupt:
                 print
+            except EOFError:
+                pass
     # command handlers go here
     def exit_handler(self,argv):
         print 'exit'
@@ -87,5 +89,5 @@ class Session:
                     print self.name, ": cat:", argv[1], ": No such file or directory"
                 if realFile == None:
                     print self.name, ": cat:", argv[1], ": Is a directory"
-    def look_handler(self,argv):
+    def look_handler(self,argv):    
         print self.pwd.look
