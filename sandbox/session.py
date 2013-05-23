@@ -9,7 +9,7 @@ class Session:
         while True:
             try:
                 # Prompt the user for a new command
-                cmdline = raw_input(prompt)
+                cmdline = raw_input(self.pwd.name + prompt)
                 # Break the command line into an argv list
                 argv = cmdline.split()
                 if len(argv) == 0:
@@ -55,7 +55,37 @@ class Session:
                 realDirectory = False
                 for item in self.pwd.children:
                     if item.name == argv[1]:
-                        self.pwd = item
-                        realDirectory = True
+                        if item.isDir() == True:
+                            self.pwd = item
+                            realDirectory = True
+                        else:
+                            realDirectory = None
                 if realDirectory == False:
-                    print self.name, ": goto:", argv[1], "no such file or directory"
+                    print self.name, ": goto:", argv[1], ": No such file or directory"
+                if realDirectory == None:
+                    print self.name, ": goto:", argv[1], ": Not a directory"
+
+    def cat_handler(self,argv):
+        #if there is no second argument refer to man page
+        if len(argv) == 1:
+            print self.name, ": cat:", "Missing operand"
+            print "Try 'cat --help' for more information"
+        else:
+            if argv[1] == '--help':
+                print "No! You don't get help. This is a challenge. Work it out. Meow."
+            else:
+                realFile = False
+                for item in self.pwd.children:
+                    if item.name == argv[1]:
+                        try:
+                            if item.isFile == True:
+                                print item.contents
+                                realFile = True
+                        except:
+                            realFile = None
+                if realFile == False:
+                    print self.name, ": cat:", argv[1], ": No such file or directory"
+                if realFile == None:
+                    print self.name, ": cat:", argv[1], ": Is a directory"
+    def look_handler(self,argv):
+        print self.pwd.look
