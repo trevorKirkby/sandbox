@@ -14,8 +14,8 @@ class Session:
                 argv = cmdline.split()
                 if len(argv) == 0:
                     continue
-                # Look for a handler that matches argv[0]
-                handler = getattr(self,argv[0]+'_handler',None)
+                # Look for a builtin handler that matches argv[0]
+                handler = getattr(self,argv[0]+'_builtin',None)
                 if handler:
                     handler(argv)
                 else:
@@ -25,22 +25,22 @@ class Session:
             except EOFError:
                 pass
     # command handlers go here
-    def exit_handler(self,argv):
+    def exit_builtin(self,argv):
         print 'exit'
         raise SystemExit
 
-    def pwd_handler(self,argv):
+    def pwd_builtin(self,argv):
         print '/'.join(self.pwd.abspath())
 
-    def ls_handler(self,argv):
+    def ls_builtin(self,argv):
         for name in self.pwd.children:
             print ('%-16s' % name),
         print
 
-    def whoami_handler(self,argv):
+    def whoami_builtin(self,argv):
         print 'seriously??'
 
-    def goto_handler(self,argv):
+    def goto_builtin(self,argv):
         #if there is no second argument go home like in cd
         if len(argv) == 1:
             self.pwd = home
@@ -67,7 +67,7 @@ class Session:
                 if realDirectory == None:
                     print self.name, ": goto:", argv[1], ": Not a directory"
 
-    def cat_handler(self,argv):
+    def cat_builtin(self,argv):
         #if there is no second argument refer to man page
         if len(argv) == 1:
             print self.name, ": cat:", "Missing operand"
@@ -89,5 +89,5 @@ class Session:
                     print self.name, ": cat:", argv[1], ": No such file or directory"
                 if realFile == None:
                     print self.name, ": cat:", argv[1], ": Is a directory"
-    def look_handler(self,argv):    
+    def look_builtin(self,argv):    
         print self.pwd.look
