@@ -28,9 +28,10 @@ class Directory(Node):
     def add(self,node):
         node.parent = self
         self.children[node.name] = node
-    # Make an empty subdirectory
+        return node
+    # Makes and returns an empty subdirectory
     def mkdir(self,name):
-        self.add(Directory(name))
+        return self.add(Directory(name))
     def isDir(self):
         return True
 
