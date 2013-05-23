@@ -1,26 +1,8 @@
 class Node:
-    def __init__(self):
-        pass
-
-class File(Node):
-    def __init__(self,name,contents=None):
-        self.isFile = True
-        self.name = name
-        self.contents = contents
-    def isDir(self):
-        return False
-
-class Directory(Node):
     def __init__(self,name):
         self.name = name
         self.parent = None
-        self.children = [ ]
-        self.look = 'nothing'
-    # Add a File or Directory to our contents
-    def add(self,node):
-        node.parent = self
-        self.children.append(node)
-    # Returns a list of the directory names in our absolute path
+    # Returns the absolute path of this node as a list node names
     def abspath(self):
         path = [ self.name ]
         node = self
@@ -28,6 +10,27 @@ class Directory(Node):
             node = node.parent
             path.insert(0,node.name)
         return path
+        
+class File(Node):
+    def __init__(self,name,contents=None):
+        Node.__init__(self,name)
+        self.isFile = True
+        self.contents = contents
+    def isDir(self):
+        return False
+
+class Directory(Node):
+    def __init__(self,name):
+        Node.__init__(self,name)
+        self.children = { }
+        self.look = 'nothing'
+    # Add a generic node
+    def add(self,node):
+        node.parent = self
+        self.children[node.name] = node
+    # Make an empty subdirectory
+    def mkdir(self,name):
+        self.add(Directory(name))
     def isDir(self):
         return True
 
@@ -77,7 +80,7 @@ class Path:
 
 class Filesystem(Directory):
     def __init__(self):
-        Directory.__init__(self,'root')
+        Directory.__init__(self,'')
     def isDir(self):
         return True
 

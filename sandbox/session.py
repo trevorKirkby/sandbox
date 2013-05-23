@@ -33,8 +33,8 @@ class Session:
         print '/'.join(self.pwd.abspath())
 
     def ls_handler(self,argv):
-        for child in self.pwd.children:
-            print ('%-16s' % child.name),
+        for name in self.pwd.children:
+            print ('%-16s' % name),
         print
 
     def whoami_handler(self,argv):
@@ -55,10 +55,10 @@ class Session:
             #if none of the above is triggered looks through your directory's children and if they match argument two you are taken to that directory
             else:
                 realDirectory = False
-                for item in self.pwd.children:
-                    if item.name == argv[1]:
-                        if item.isDir() == True:
-                            self.pwd = item
+                for name in self.pwd.children:
+                    if name == argv[1]:
+                        if self.pwd.children[name].isDir() == True:
+                            self.pwd = self.pwd.children[name]
                             realDirectory = True
                         else:
                             realDirectory = None
@@ -77,11 +77,11 @@ class Session:
                 print "No! You don't get help. This is a challenge. Work it out. Meow."
             else:
                 realFile = False
-                for item in self.pwd.children:
-                    if item.name == argv[1]:
+                for name in self.pwd.children:
+                    if name == argv[1]:
                         try:
-                            if item.isFile == True:
-                                print item.contents
+                            if self.pwd.children[name].isFile == True:
+                                print self.pwd.children[name].contents
                                 realFile = True
                         except:
                             realFile = None
