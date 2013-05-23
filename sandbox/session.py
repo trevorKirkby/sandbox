@@ -46,9 +46,9 @@ class Session:
         else:
             if argv[1] == '..':
                 #if there is no parent directory just do nothing
-                try:
+                if self.pwd.parent != None:
                     self.pwd = self.pwd.parent
-                except:
+                else:
                     pass
             #if none of the above is triggered looks through your directory's children and if they match argument two you are taken to that directory
             else:
