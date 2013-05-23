@@ -4,6 +4,38 @@ class Session:
         self.name = name
         self.home = home
         self.pwd = home
+    # returns the node corresponding to the specified path or None
+    def find(self,path,debug=False):
+        # split the path into names separated by '/'
+        names = path.split('/')
+        if debug: print 'find %r' % names
+        # decide which node the path starts from...
+        if names[0] == '':
+            node = self.fs
+            names.pop(0)
+        elif names[0] == '~':
+            node = self.home
+            names.pop(0)
+        else:
+            node = self.pwd
+        if debug: print 'find starting from "%s"' % node.name
+        # follow the path
+        while names:
+            name = names.pop(0)
+            if name == '.' or name == '':
+                pass
+            elif name == '..':
+                if node == self.fs:
+                    pass
+                else:
+                    node = node.parent
+            elif hasattr(node,'children') and name in node.children:
+                node = node.children[name]
+            else:
+                raise RuntimeError('%s: No such file or directory.' % path)
+            if debug: print 'find "%s" => "%s"' % (name,node.name)
+        return node
+        
     # here we emulate a shell session
     def shell(self,prompt):
         while True:
@@ -91,3 +123,9 @@ class Session:
                     print self.name, ": cat:", argv[1], ": Is a directory"
     def look_builtin(self,argv):    
         print self.pwd.look
+    def find_builtin(self,argv):
+        for path in argv[1:]:
+            try:
+                self.find(path,debug=True)
+            except RuntimeError,e:
+                print str(e)
