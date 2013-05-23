@@ -1,4 +1,8 @@
-class File:
+class Node:
+    def __init__(self):
+        pass
+
+class File(Node):
     def __init__(self,name,contents=None):
         self.isFile = True
         self.name = name
@@ -6,7 +10,7 @@ class File:
     def isDir(self):
         return False
 
-class Directory:
+class Directory(Node):
     def __init__(self,name):
         self.name = name
         self.parent = None
