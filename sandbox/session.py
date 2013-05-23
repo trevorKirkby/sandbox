@@ -39,12 +39,23 @@ class Session:
         print 'seriously??'
 
     def goto_handler(self,argv):
-        print argv
-        realDirectory = False
-        for item in self.pwd.children:
-            print item.name
-            if item.name == argv[1]:
-                self.pwd = item
-                realDirectory = True
-        if realDirectory == False:
-            print self.name, ": goto:", argv[1], "no such file or directory"
+        #if there is no second argument go home like in cd
+        if len(argv) == 1:
+            self.pwd = home
+        #if argument number two is .. go to your current directory's parent directory
+        else:
+            if argv[1] == '..':
+                #if there is no parent directory just do nothing
+                try:
+                    self.pwd = self.pwd.parent
+                except:
+                    pass
+            #if none of the above is triggered looks through your directory's children and if they match argument two you are taken to that directory
+            else:
+                realDirectory = False
+                for item in self.pwd.children:
+                    if item.name == argv[1]:
+                        self.pwd = item
+                        realDirectory = True
+                if realDirectory == False:
+                    print self.name, ": goto:", argv[1], "no such file or directory"
