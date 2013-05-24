@@ -1,3 +1,4 @@
+#to do next: goto/cat . fixup, tab and up arrow completions, mark command, and path use/testing
 class Session:
     def __init__(self,fs,name,home):
         self.fs = fs

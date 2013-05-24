@@ -70,10 +70,9 @@ class Path(Directory):
         if passing == False:
             for item in self.failureChoiceList:
                 exec item
-                #these end in pwd = worldRoot
+            return False
         if passing == True:
-            pass
-            #pwd = self
+            return True
     def isDir(self):
         return False
 
