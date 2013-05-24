@@ -119,7 +119,7 @@ class Session:
     def goto_builtin(self,argv):
         #if there is no second argument go home like in cd
         if len(argv) == 1:
-            self.pwd = home
+            self.pwd = self.home
         #if argument number two is .. go to your current directory's parent directory
         else:
             if argv[1] == '..':
@@ -173,3 +173,6 @@ class Session:
                 self.find(path,debug=True)
             except RuntimeError,e:
                 print str(e)
+    def man_builtin(self,argv):
+        print "The man pages are down. Sorry for the inconvenience and all that. They're not likely to be back up any time soon."
+    

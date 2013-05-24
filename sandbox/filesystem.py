@@ -20,36 +20,33 @@ class File(Node):
         return False
 
 class Directory(Node):
-    def __init__(self,name):
+    def __init__(self,name,look):
         Node.__init__(self,name)
         self.children = { }
-        self.look = 'nothing'
+        self.look = look
     # Add a generic node
     def add(self,node):
         node.parent = self
         self.children[node.name] = node
         return node
     # Makes and returns an empty subdirectory
-    def mkdir(self,name):
-        return self.add(Directory(name))
+    def mkdir(self,name,look):
+        return self.add(Directory(name,look))
     def isDir(self):
         return True
 
-class Program:
+class Program(File):
     #acess progName = prog.execute(self)
     def __init__(self,name,contents):
-        self.name = name
+        File.__init__(self,name)
         self.contents = contents
     def execute(self):
         exec contents
-    def isDir(self):
-        return False
 
-class Path:
-    def __init__(self,name,choiceList,failureChoiceList):
-        self.name = name
-        self.parent = None
-        self.children = [ ]
+class Path(Directory):
+    def __init__(self,name,choiceList,failureChoiceList,look):
+        Directory.__init__(self,name,look)
+        self.children = { }
         self.choiceList = choiceList
         self.failureChoiceList = failureChoiceList
         self.passing = True
@@ -57,6 +54,7 @@ class Path:
     def add(self,node):
         node.parent = self
         self.children.append(node)
+        return node
     # Returns our absolute path as a string
     def abspath(self):
         path = [ self.name ]
@@ -80,9 +78,9 @@ class Path:
         return False
 
 class Filesystem(Directory):
-    def __init__(self):
-        Directory.__init__(self,'')
+    def __init__(self,look):
+        Directory.__init__(self,'',look)
 
 class World(Directory):
-    def __init__(self,name):
-        Directory.__init__(self,name)
+    def __init__(self,name,look):
+        Directory.__init__(self,name,look)
