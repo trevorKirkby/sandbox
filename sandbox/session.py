@@ -166,14 +166,43 @@ class Session:
                     print self.name, ": cat:", argv[1], ": No such file or directory"
                 if realFile == None:
                     print self.name, ": cat:", argv[1], ": Is a directory"
+
     def look_builtin(self,argv):    
         print self.pwd.look
+
     def find_builtin(self,argv):
         for path in argv[1:]:
             try:
                 self.find(path,debug=True)
             except RuntimeError,e:
                 print str(e)
+
     def man_builtin(self,argv):
         print "The man pages are down. Sorry for the inconvenience and all that. They're not likely to be back up any time soon."
-    
+
+    def exc_builtin(self,argv):
+        if len(argv) == 1:
+            print self.name, ": exc: seriously???? All you have to do is type exc then an executable file! no python this, no bash this, just exc than program! Sheesh!"
+        else:
+            if argv[1] == '--help':
+                print "No! You don't get help. This is a challenge. Work it out. Or this program will exc you."
+            else:
+                realProg = False
+                for name in self.pwd.children:
+                    if name == argv[1]:
+                        if True:
+                            if self.pwd.children[name].isProg == True:
+                                passing = self.pwd.children[name].execute()
+                                if passing == True:
+                                    self.pwd = self.pwd.children[name]
+                                if passing == False:
+                                    self.pwd = self.home
+                                if passing == None:
+                                    pass
+                                realProg = True
+                        if False:
+                            realProg = None
+                if realProg == False:
+                    print self.name, ": exc:", argv[1], ": No such file or directory"
+                if realProg == None:
+                    print self.name, ": exc:", argv[1], ": Not a program"

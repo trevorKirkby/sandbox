@@ -9,7 +9,7 @@ users = rootdir.mkdir('users','user folder, two doors, yadda yadda ya...')
 trevor = users.mkdir('trevor','welcome to your home directory. This is a sandbox simulation and all that.')
 desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?')
 
-gateway = fs.Path('gateway',['print "hello"','thingvariable=raw_input("to a frequency of theta thought devided alpha beta absurd and dissonant are its cries, yet convincing when it lies, rarely at the fore of mind, shows you what you couldnt find, only of panic to memory can bind, and without one is less kind. What am I?: ")','if thingvariable != "dream": passing = False'],['print "you lose!"','print "no entry!"'],'its a big vault door. See if you can gain entry through the challenges(by the way you cant)')
+gateway = fs.Path('gateway',['print "hello"','thingvariable=raw_input("to a frequency of theta thought devided alpha beta absurd and dissonant are its cries, yet convincing when it lies, rarely at the fore of mind, shows you what you couldnt find, only of panic to memory can bind, and without one is less kind. What am I?: ")','if thingvariable != "solve": self.passing = False'],['print "you lose!"','print "no entry!"'],'its a big vault door. See if you can gain entry through the challenges(by the way you cant)',True)
 trevor.add(gateway)
 
 filething = fs.File('file.txt','blub blub im a fish')

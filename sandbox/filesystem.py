@@ -40,16 +40,20 @@ class Program(File):
     def __init__(self,name,contents):
         File.__init__(self,name)
         self.contents = contents
+        self.isProg = True
     def execute(self):
         exec contents
+        return None
 
 class Path(Directory):
-    def __init__(self,name,choiceList,failureChoiceList,look):
+    def __init__(self,name,choiceList,failureChoiceList,look,loopBool):
         Directory.__init__(self,name,look)
         self.children = { }
         self.choiceList = choiceList
         self.failureChoiceList = failureChoiceList
         self.passing = True
+        self.isProg = True
+        self.loop = loopBool
     # Add a File or Directory to our contents
     def add(self,node):
         node.parent = self
@@ -67,11 +71,14 @@ class Path(Directory):
         for item in self.choiceList:
             exec item
             #program can make passing false if you get it's requirements wrong
-        if passing == False:
+        if self.passing == False:
             for item in self.failureChoiceList:
                 exec item
-            return False
-        if passing == True:
+            if self.loop == True:
+                return False
+            else:
+                return None
+        if self.passing == True:
             return True
     def isDir(self):
         return False
