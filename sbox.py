@@ -5,6 +5,8 @@ import sandbox.session
 rootdir = fs.Filesystem('this is rootDir. Cool command isnt it?')
 
 users = rootdir.mkdir('users','user folder, two doors, yadda yadda ya...')
+dog = fs.Program('rootAI',['variaable1 = raw_input("what do you want?!: ")','if variaable1 == "the answer": print "just type solve"'])
+rootdir.add(dog)
 
 trevor = users.mkdir('trevor','welcome to your home directory. This is a sandbox simulation and all that.')
 desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?')

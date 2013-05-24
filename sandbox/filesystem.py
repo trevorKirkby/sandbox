@@ -42,7 +42,8 @@ class Program(File):
         self.contents = contents
         self.isProg = True
     def execute(self):
-        exec contents
+        for line in self.contents:
+            exec line
         return None
 
 class Path(Directory):

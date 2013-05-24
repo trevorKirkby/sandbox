@@ -193,7 +193,6 @@ class Session:
                         if True:
                             if self.pwd.children[name].isProg == True:
                                 passing = self.pwd.children[name].execute()
-                                print str(passing)
                                 if passing == True:
                                     self.pwd = self.pwd.children[name]
                                 if passing == False:
