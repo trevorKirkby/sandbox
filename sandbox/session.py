@@ -4,18 +4,21 @@ class Session:
         self.name = name
         self.home = home
         self.pwd = home
-    # expands the specified path by replacing any leading ~
-    def expand(self,path):
-        if path == '~':
-            return self.home.abspath()
-        elif path.startswith('~'):
-            return self.home.abspath() + '/' + path[1:]
-        else:
-            return path
-    # returns the node corresponding to the specified path or None
+    # expands the specified list of paths by replacing any leading ~
+    def expand(self,paths):
+        expanded = [ ]
+        for path in paths:
+            if path == '~':
+                expanded.append(self.home.abspath())
+            elif path.startswith('~'):
+                expanded.append(self.home.abspath() + '/' + path[1:])
+            else:
+                expanded.append(path)
+        return expanded
+    # returns the node corresponding to the specified path or raises a RuntimeError
     def find(self,path,debug=False):
-        # split the expanded path into names separated by '/'
-        names = self.expand(path).split('/')
+        # split the path into names separated by '/'
+        names = path.split('/')
         if debug: print 'find %r' % names
         # decide which node the path starts from...
         if names[0] == '':
@@ -54,6 +57,8 @@ class Session:
                 argv = cmdline.split()
                 if len(argv) == 0:
                     continue
+                # Expand the command line
+                argv = self.expand(argv)
                 # Look for a builtin handler that matches argv[0]
                 handler = getattr(self,argv[0]+'_builtin',None)
                 if handler:
@@ -80,9 +85,8 @@ class Session:
         # Loop over the arguments and separate them into dirs and files
         dirs = { }
         files = { }
-        for path in argv[1:]:
+        for name in argv[1:]:
             try:
-                name = self.expand(path)
                 node = self.find(name)
                 if node.isDir():
                     dirs[name] = node
