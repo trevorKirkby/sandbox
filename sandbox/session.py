@@ -4,10 +4,18 @@ class Session:
         self.name = name
         self.home = home
         self.pwd = home
+    # expands the specified path by replacing any leading ~
+    def expand(self,path):
+        if path == '~':
+            return self.home.abspath
+        elif path.startsswith('~'):
+            return self.home.abspath + '/' + path[1:]
+        else:
+            return path
     # returns the node corresponding to the specified path or None
     def find(self,path,debug=False):
-        # split the path into names separated by '/'
-        names = path.split('/')
+        # split the expanded path into names separated by '/'
+        names = self.expand(path).split('/')
         if debug: print 'find %r' % names
         # decide which node the path starts from...
         if names[0] == '':
