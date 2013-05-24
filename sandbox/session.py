@@ -7,9 +7,9 @@ class Session:
     # expands the specified path by replacing any leading ~
     def expand(self,path):
         if path == '~':
-            return self.home.abspath
-        elif path.startsswith('~'):
-            return self.home.abspath + '/' + path[1:]
+            return self.home.abspath()
+        elif path.startswith('~'):
+            return self.home.abspath() + '/' + path[1:]
         else:
             return path
     # returns the node corresponding to the specified path or None
@@ -70,12 +70,44 @@ class Session:
         raise SystemExit
 
     def pwd_builtin(self,argv):
-        print '/'.join(self.pwd.abspath())
+        print self.pwd.abspath()
 
+    # Emulate the behavior of /bin/ls with no options
     def ls_builtin(self,argv):
-        for name in self.pwd.children:
+        # Default argument is '.'
+        if len(argv) == 1:
+            argv.append('.')
+        # Loop over the arguments and separate them into dirs and files
+        dirs = { }
+        files = { }
+        for path in argv[1:]:
+            try:
+                name = self.expand(path)
+                node = self.find(name)
+                if node.isDir():
+                    dirs[name] = node
+                else:
+                    files[name] = node
+            except RuntimeError,error:
+                print '%s: %s' % (argv[0],str(error))
+        # List files in alphabetical order
+        for name in sorted(files.iterkeys()):
             print ('%-16s' % name),
-        print
+        # Blank line to separate files and dirs
+        if len(files) > 0: print
+        if len(files) > 0 and len(dirs) > 0: print
+        # List dirs in alphabetical order
+        firstdir = True
+        for name in sorted(dirs.iterkeys()):
+            if not firstdir: print
+            firstdir = False
+            # Print dir name if we got more than 1 arg
+            if len(argv) > 2:
+                print '%s:' % name
+            # Print dir contents in alphabetical order
+            for childname in sorted(dirs[name].children.iterkeys()):
+                    print ('%-16s' % childname),
+            print
 
     def whoami_builtin(self,argv):
         print 'seriously??'

@@ -2,14 +2,14 @@ class Node:
     def __init__(self,name):
         self.name = name
         self.parent = None
-    # Returns the absolute path of this node as a list node names
+    # Returns our absolute path as a string
     def abspath(self):
         path = [ self.name ]
         node = self
         while node.parent:
             node = node.parent
             path.insert(0,node.name)
-        return path
+        return '/'.join(path)
         
 class File(Node):
     def __init__(self,name,contents=None):
@@ -57,14 +57,14 @@ class Path:
     def add(self,node):
         node.parent = self
         self.children.append(node)
-    # Returns a list of the directory names in our absolute path
+    # Returns our absolute path as a string
     def abspath(self):
         path = [ self.name ]
         node = self
         while node.parent:
             node = node.parent
             path.insert(0,node.name)
-        return path
+        return '/'.join(path)
     def execute(self):
         for item in self.choiceList:
             exec item
