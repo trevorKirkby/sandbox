@@ -1,4 +1,7 @@
 #to do next: goto/cat . fixup, tab and up arrow completions, mark command, and path use/testing
+
+from termcolor import colored, cprint
+
 class Session:
     def __init__(self,fs,name,home):
         self.fs = fs
@@ -115,7 +118,8 @@ class Session:
             print
 
     def whoami_builtin(self,argv):
-        print 'seriously??'
+        #cprint('Seriously???', 'green', attrs=['bold'])
+        print 'seriously??????'
 
     def goto_builtin(self,argv):
         #if there is no second argument go home like in cd
