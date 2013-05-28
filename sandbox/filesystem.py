@@ -36,7 +36,7 @@ class Directory(Node):
         return self.add(Directory(name,look))
     def isDir(self):
         return True
-
+'''
 class Program(File):
     #acess progName = prog.execute(self)
     def __init__(self,name,contents):
@@ -47,7 +47,6 @@ class Program(File):
         for line in self.contents:
             exec line
         return None
-
 class Path(Directory):
     def __init__(self,name,choiceList,failureChoiceList,look,loopBool):
         Directory.__init__(self,name,look)
@@ -85,7 +84,7 @@ class Path(Directory):
             return True
     def isDir(self):
         return False
-
+'''
 class Filesystem(Directory):
     def __init__(self,look):
         Directory.__init__(self,'',look)
