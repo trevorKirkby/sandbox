@@ -1,4 +1,4 @@
-#to do next: goto/cat . fixup, tab and up arrow completions, mark command, and path use/testing
+#to do next: goto/cat . fixup, tab and up arrow completions, mark command, and insult expansions, and add to autoprint so you may specify modifier if you dont want fully automatized
 
 from termcolor import colored, cprint
 
