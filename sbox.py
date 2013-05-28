@@ -30,4 +30,4 @@ c = fs.File('c.txt','Here I am!')
 ryan.add(c)
 
 s = sandbox.session.Session(rootdir,'mash',trevor)
-s.shell('> ')
+s.shell('/$: ')

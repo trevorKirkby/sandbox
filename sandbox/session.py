@@ -56,7 +56,9 @@ class Session:
         while True:
             try:
                 # Prompt the user for a new command
-                cmdline = raw_input(self.pwd.name + prompt)
+                #cprint(self.pwd.name, 'yellow', attrs=['bold'])
+                print colored(self.pwd.name, "yellow", attrs=['bold']),
+                cmdline = raw_input(prompt)
                 # Break the command line into an argv list
                 argv = cmdline.split()
                 if len(argv) == 0:
