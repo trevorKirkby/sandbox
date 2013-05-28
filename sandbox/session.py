@@ -121,8 +121,7 @@ class Session:
             print
 
     def whoami_builtin(self,argv):
-        #cprint('Seriously???', 'green', attrs=['bold'])
-        print 'seriously??????'
+        cprint('Seriously???', 'red', 'on_yellow', attrs=['dark','underline'])
 
     def goto_builtin(self,argv):
         #if there is no second argument go home like in cd
