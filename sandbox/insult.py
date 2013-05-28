@@ -19,4 +19,4 @@ def isInsult(string,responseModifier = None,responseBool=True):
                                 return True
 
 def giveInsult(insultWhat,degreeOfOffense,personalityModifier,Imaginativeness):
-        print "you big frick!"
+        return "you big frick!"

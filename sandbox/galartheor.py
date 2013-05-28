@@ -25,36 +25,40 @@ class gProg(ex.program):
                 self.persons = ['default','megalomaniac','uberDrama','stupid/borderlineStoned','genius','hyperAngry','spazzy','passiveAgressive','theta']
                 self.personalityBubble = self.persons[0]
                 self.STIPM = None
+                #remember- add a taunt instances program to give pre-typed taunts according to performance on the fly and according to mood, and an autotaunt piped through autoprint that gives a taunt depending on mood(some taunts are just your dumb some are more amusing)
         def wordByWordPrint(self,text1,waitTime):
                 text = text1.split()
                 for word in text:
 		        randthing = random.choice(range(waitTime)) + 1
 		        randVariable = randthing/5
 		        print word,
-		        print " ",
 		        sys.stdout.flush()
 		        time.sleep(randVariable)
         def gprint(self,text,adj='standard'):
                 if adj == 'standard':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'red', 'on_white', attrs=['dark','underline'])
                 if adj == 'pleased':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'blue', 'on_cyan', attrs=['bold'])
                 if adj == 'excited':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'yellow', 'on_blue', attrs=['dark','bold','underline'])
                 if adj == 'angry':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'red', attrs=['bold','underline'])
                 if adj == 'quiet':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'blue', 'on_white', attrs=['dark','underline'])
+                if adj == 'confused':
+                        return colored(text, 'cyan', 'on_white', attrs=['dark'])
                 if adj == 'annoyed':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'yellow', 'on_yellow', attrs=['bold','dark','underline'])
                 if adj == 'sarcastic':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'white', 'on_yellow', attrs=['bold','underline'])
                 if adj == 'dramatic':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'green', 'on_red', attrs=['bold','underline'])
                 if adj == 'amused':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'green', 'on_grey', attrs=['dark','bold','underline'])
                 if adj == 'warning':
-                        return colored(text, 'red', 'on_yellow', attrs=['dark','underline'])
+                        return colored(text, 'red', 'on_yellow', attrs=['dark','bold'])
+                if adj == 'insane':
+                        return colored(text, 'magenta', 'on_yellow', attrs=['bold','underline'])
         def dprint(self,text):
                 if anger > 40:
                         marker = True
@@ -65,8 +69,29 @@ class gProg(ex.program):
                                 gprint(self,text,'angry')
                 else:
                         gprint(self,text)
-        def autoprint(self,text,timewait):
+        def autoprint(self,text,timewait=5):
                 self.wordByWordPrint(self.dprint(),timewait)
         def remember(self,variable):
                 self.STIPM = variable
                 #short term inter program memory
+
+class samplePrinter(gProg):
+        def __init__(self):
+                gProg.__init__(self,'samplePrinter')
+        def execute(self):
+                self.autoprint('hello, this is a high level collection of functions to print text')
+                self.autoprint('it will be used to create a collection of AI programs that share some core feature, for example color coded voice tones and on the fly insults. this is the standard speech settings')
+                self.wordByWordPrint(self.gprint('this is pleased voice. I am very pleased','pleased'))
+                self.wordByWordPrint(self.gprint('this is excited voice. I am very excited','excited'))
+                self.wordByWordPrint(self.gprint('this is angry voice. I am very angry','angry'))
+                self.wordByWordPrint(self.gprint('theres also quiet','quiet'))
+                self.wordByWordPrint(self.gprint('and confused','confused'))
+                self.wordByWordPrint(self.gprint('and annoyed','annoyed'))
+                self.wordByWordPrint(self.gprint('and sarcastic','sarcastic'))
+                self.wordByWordPrint(self.gprint('and dramatic','dramatic'))
+                self.wordByWordPrint(self.gprint('and amused','amused'))
+                self.wordByWordPrint(self.gprint('and in critical condition','warning'))
+                self.wordByWordPrint(self.gprint('and insane','insane'))
+                self.autoprint("have an on-the-fly insult, too")
+                self.autoprint(insult.giveInsult(None,None,None,None))
+                self.autoprint('you may also notice executables are extremely cleaned up and ful;y functional, and that the ps1 is waaay cooler. That is about it.')
