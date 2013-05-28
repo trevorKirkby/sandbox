@@ -1,17 +1,18 @@
 import sandbox.filesystem as fs
 import sandbox.session
+import sandbox.executables as ex
 
 
 rootdir = fs.Filesystem('this is rootDir. Cool command isnt it?')
 
 users = rootdir.mkdir('users','user folder, two doors, yadda yadda ya...')
-dog = fs.Program('rootAI',['variaable1 = raw_input("what do you want?!: ")','if variaable1 == "the answer": print "just type solve"'])
+dog = ex.rootAI()
 rootdir.add(dog)
 
 trevor = users.mkdir('trevor','welcome to your home directory. This is a sandbox simulation and all that.')
 desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?')
 
-gateway = fs.Path('gateway',['print "hello"','thingvariable=raw_input("to a frequency of theta thought devided alpha beta absurd and dissonant are its cries, yet convincing when it lies, rarely at the fore of mind, shows you what you couldnt find, only of panic to memory can bind, and without one is less kind. What am I?: ")','if thingvariable != "solve": self.passing = False','if thingvariable == "solve": self.passing = True','print self.passing'],['print "you lose!"','print "no entry!"'],'nothing. you solved it for nothing. so there. haha!',True)
+gate = ex.gateway()
 trevor.add(gateway)
 
 filething = fs.File('file.txt','blub blub im a fish')

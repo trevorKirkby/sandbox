@@ -189,14 +189,15 @@ class Session:
             print self.name, ": exc: seriously???? All you have to do is type exc then an executable file! no python this, no bash this, just exc than program! Sheesh!"
         else:
             if argv[1] == '--help':
-                print "No! You don't get help. This is a challenge. Work it out. Or this program will exc you."
+                print "No! You don't get help. This is a challenge. Work it out. Get it right or this program will exc you."
             else:
                 realProg = False
                 for name in self.pwd.children:
                     if name == argv[1]:
-                        if True:
+                        if self.pwd.children[name].isExc() == True:
                             if self.pwd.children[name].isProg == True:
                                 passing = self.pwd.children[name].execute()
+                                #true means you advance to directory, false means your booted back to homedir, none means nothing happens
                                 if passing == True:
                                     self.pwd = self.pwd.children[name]
                                 if passing == False:
@@ -204,7 +205,7 @@ class Session:
                                 if passing == None:
                                     pass
                                 realProg = True
-                        if False:
+                        else:
                             realProg = None
                 if realProg == False:
                     print self.name, ": exc:", argv[1], ": No such file or directory"
