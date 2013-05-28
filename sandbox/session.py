@@ -57,6 +57,7 @@ class Session:
             try:
                 # Prompt the user for a new command
                 #cprint(self.pwd.name, 'yellow', attrs=['bold'])
+                print colored(self.home.name, "green", attrs=['bold','dark','underline']),
                 print colored(self.pwd.name, "yellow", attrs=['bold']),
                 cmdline = raw_input(prompt)
                 # Break the command line into an argv list
