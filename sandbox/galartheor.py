@@ -43,28 +43,30 @@ class gProg(ex.program):
                                 word = word + ' '
                                 if adj == 'standard':
                                         newText.append(colored(word, 'red', 'on_white', attrs=['dark','underline']))
-                                if adj == 'pleased':
+                                elif adj == 'pleased':
                                         newText.append(colored(word, 'blue', 'on_cyan', attrs=['bold']))
-                                if adj == 'excited':
+                                elif adj == 'excited':
                                         newText.append(colored(word, 'yellow', 'on_blue', attrs=['dark','bold','underline']))
-                                if adj == 'angry':
+                                elif adj == 'angry':
                                         newText.append(colored(word, 'red', attrs=['bold','underline']))
-                                if adj == 'quiet':
+                                elif adj == 'quiet':
                                         newText.append(colored(word, 'blue', 'on_white', attrs=['dark','underline']))
-                                if adj == 'confused':
+                                elif adj == 'confused':
                                         newText.append(colored(word, 'cyan', 'on_white', attrs=['dark']))
-                                if adj == 'annoyed':
+                                elif adj == 'annoyed':
                                         newText.append(colored(word, 'yellow', 'on_yellow', attrs=['bold','dark','underline']))
-                                if adj == 'sarcastic':
+                                elif adj == 'sarcastic':
                                         newText.append(colored(word, 'white', 'on_yellow', attrs=['bold','underline']))
-                                if adj == 'dramatic':
+                                elif adj == 'dramatic':
                                         newText.append(colored(word, 'green', 'on_red', attrs=['bold','underline']))
-                                if adj == 'amused':
+                                elif adj == 'amused':
                                         newText.append(colored(word, 'green', 'on_grey', attrs=['dark','bold','underline']))
-                                if adj == 'warning':
+                                elif adj == 'warning':
                                         newText.append(colored(word, 'red', 'on_yellow', attrs=['dark','bold']))
-                                if adj == 'insane':
+                                elif adj == 'insane':
                                         newText.append(colored(word, 'magenta', 'on_yellow', attrs=['bold','underline']))
+                                else:
+                                        raise RuntimeError('bad adjective in gprint')
                         return newText
                 else:
                         if True:
