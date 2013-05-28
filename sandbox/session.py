@@ -195,7 +195,7 @@ class Session:
                 for name in self.pwd.children:
                     if name == argv[1]:
                         if self.pwd.children[name].isExc() == True:
-                            if self.pwd.children[name].isProg == True:
+                            if True:
                                 passing = self.pwd.children[name].execute()
                                 #true means you advance to directory, false means your booted back to homedir, none means nothing happens
                                 if passing == True:

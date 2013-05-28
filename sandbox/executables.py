@@ -4,22 +4,22 @@ import time
 
 class program(fs.Node):
         def __init__(self,name):
-                Node.__init__(self,name)
-        def isDir():
+                fs.Node.__init__(self,name)
+        def isDir(self):
                 return False
-        def isExc():
+        def isExc(self):
                 return True
 
 
 class path(fs.Directory):
         def __init__(self,name,look):
-                Directory.__init__(self,name,look)
+                fs.Directory.__init__(self,name,look)
                 self.children = { }
                 self.passing = None
                 self.isProg = True
-        def isDir():
+        def isDir(self):
                 return False
-        def isExc():
+        def isExc(self):
                 return True
 
 
@@ -28,7 +28,7 @@ class rootAI(program):
                 program.__init__(self,'rootAI')
                 #here is also a good place to make remembered variables, or pickled variables, stored in self.variable
                 self.temper = 1
-        def execute():
+        def execute(self):
                 variable = raw_input("what d'ya want?!: ")
                 if insult.isInsult(variable,'cranky') == True:
                         self.temper = self.temper + 5
@@ -55,7 +55,7 @@ class rootAI(program):
 class gateway(path):
         def __init__(self):
                 path.__init__(self,'gateway','there is actually nothing in here! so far there is no objective in the challenge.')
-        def execute():
+        def execute(self):
                 print 'hello. here is a standardized question in which you will give the correct solution to earn passage: '
                 time.sleep(1)
                 variable2 = raw_input("what is the correct answer? : ")

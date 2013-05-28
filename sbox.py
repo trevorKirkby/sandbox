@@ -13,7 +13,7 @@ trevor = users.mkdir('trevor','welcome to your home directory. This is a sandbox
 desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?')
 
 gate = ex.gateway()
-trevor.add(gateway)
+trevor.add(gate)
 
 filething = fs.File('file.txt','blub blub im a fish')
 desktop.add(filething)

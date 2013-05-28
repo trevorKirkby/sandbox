@@ -10,6 +10,8 @@ class Node:
             node = node.parent
             path.insert(0,node.name)
         return '/'.join(path)
+    def isExc(self):
+        return False
         
 class File(Node):
     def __init__(self,name,contents=None):
