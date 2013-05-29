@@ -65,8 +65,8 @@ class Session:
                 # be reproduced using raw_input('\001\002> ')
                 thisprompt = (
                     '\001' +
-                    #colored('\002'+self.home.name+'\001', "green", attrs=['bold','dark','underline'])
-                    #+ '\002 \001' +
+                    colored('\002'+self.home.name+'\001', "green", attrs=['bold','dark','underline'])
+                    + '\002 \001' +
                     colored('\002'+self.pwd.name+'\001', "yellow", attrs=['bold'])
                     + '\002'+ prompt)
                 cmdline = raw_input(thisprompt)
