@@ -66,7 +66,8 @@ class gProg(ex.program):
                                 elif adj == 'insane':
                                         newText.append(colored(word, 'magenta', 'on_yellow', attrs=['bold','underline']))
                                 else:
-                                        raise RuntimeError('bad adjective in gprint')
+                                        print 'Error: Galartheor: gprint: Bad Adjective'
+                                        raise KeyboardInterrupt
                         return newText
                 else:
                         if True:

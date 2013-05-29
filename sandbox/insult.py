@@ -21,3 +21,4 @@ def isInsult(string,responseModifier = None,responseBool=True):
 
 def giveInsult(insultWhat,degreeOfOffense,personalityModifier,Imaginativeness):
         return "you big frick!"
+        #insultsLists-
