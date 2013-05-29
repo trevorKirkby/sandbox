@@ -57,11 +57,18 @@ class Session:
     def shell(self,prompt):
         while True:
             try:
-                # Prompt the user for a new command
-                #cprint(self.pwd.name, 'yellow', attrs=['bold'])
-                print colored(self.home.name, "green", attrs=['bold','dark','underline']),
-                print colored(self.pwd.name, "yellow", attrs=['bold']),
-                cmdline = raw_input(prompt)
+                # Prompt the user for a new command. Non-printing characters mess up readline
+                # unless they are delimted with \001...\002. For details, see:
+                # http://stackoverflow.com/questions/9468435/look-how-to-fix-column-calculation-in-python-readline-if-use-color-prompt
+                # bracketing color control sequences should work but doesn't seem to. The problem can
+                # be reproduced using raw_input('\001\002> ')
+                thisprompt = (
+                    '\001' +
+                    #colored('\002'+self.home.name+'\001', "green", attrs=['bold','dark','underline'])
+                    #+ '\002 \001' +
+                    colored('\002'+self.pwd.name+'\001', "yellow", attrs=['bold'])
+                    + '\002'+ prompt)
+                cmdline = raw_input(thisprompt)
                 # Break the command line into an argv list
                 argv = cmdline.split()
                 if len(argv) == 0:
