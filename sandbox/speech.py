@@ -7,7 +7,7 @@ def ask(question):
         #asks a question and returns answer easily
         variable = raw_input(question)
         return variable
-def respond(qname,say,reply,returnBool=False,reverseBool=False):
+def respond(qname,say,reply,returnBool=True,reverseBool=False):
         if reverseBool == False:
                 if qname == say:
                         if returnBool == True:
@@ -41,15 +41,15 @@ def isIn(qname,say):
         found = False
         for word in said:
                 for part in identify:
-                        if part == word and index = index2:
+                        if part == word and index == index2:
                                 index2 = index2 + 1
                                 index = index + 1
-        if index2 = len(identify):
+        if index2 == len(identify):
                 found = True
         return found
 
 def reply(qname,say,reply,returnBool=True,reverseBool=False,directedAt='me'):
-        #after dinner incorporate negatoried and directed at, for example if told to find if the word idiot is directed at self, will not trigger in these times because of this: your not an idiot,  or he is an idiot
+        #after dinner incorporate negatoried and directed at, for example if told to find if the word idiot is directed at self, will not trigger in these times because of this: your not an idiot,  or he is an idiot, also paralell synonyms, such as your and idiot and your stupid, and basic speech formatting, such as your an idiot and you are an idiot
         found = isIn(qname,say)
         if reverseBool == False and found == True:
                 if returnBool == True:
@@ -72,9 +72,9 @@ def reply(qname,say,reply,returnBool=True,reverseBool=False,directedAt='me'):
                 raise KeyboardInterrupt
 
 def greet(personality,returnBool=False):
-        if returnBool = True:
+        if returnBool == True:
                 return 'hello!'
-        elif returnBool = False;
+        elif returnBool == False:
                 print 'hello!'
         else:
                 print 'Error: Speech: Greet Function: Specify a True or False return boolean'

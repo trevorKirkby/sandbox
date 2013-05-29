@@ -5,6 +5,7 @@ import sys
 import insult
 import math
 import random
+import speech as s
 
 class gProg(ex.program):
         def __init__(self,name):
@@ -112,11 +113,16 @@ class gProg(ex.program):
                                 return self.gprint(str(text),False)
                         if rejoin == False:
                                 return self.gprint(text,'standard')
-        def autoprint(self,text,timewait=3):
-                return self.wordByWordPrint(self.dprint(text),timewait)
+        def autoprint(self,text,timewait=3,dprint=True):
+                if dprint == True:
+                        return self.wordByWordPrint(self.dprint(text),timewait)
+                else:
+                        return self.wordByWordPrint(self.gprint(text,adj=dprint),timewait)
         def remember(self,variable):
                 self.STIPM = variable
                 #short term inter program memory
+        def greply(feild,hear,reply,timewait,voice='standard'):
+                self.autoprint(s.reply(feild,hear,reply),timewait,voice)
 
 class samplePrinter(gProg):
         def __init__(self):
@@ -155,6 +161,38 @@ class samplePrinter(gProg):
                 self.autoprint('you may also notice executables are extremely cleaned up and fully functional, and that the ps1 is waaay cooler. That is about it.')
                 print ""
 
-class prog():
-        def __init__():
-                pass
+class program(gProg):
+        def __init__(self):
+                gProg.__init__(self,'program')
+        def execute(self):
+                question = s.ask(self.gprint('Pleased to meet you. What is it? : ','standard',False))
+                self.autoprint(s.reply(question,'how are you?',"I am well, thank you"),3,'standard')
+                self.autoprint(s.reply(question,'Information',"If you want information, you need to start at the root of the challenge..."),3,'amused')
+                self.autoprint(s.reply(question,'what do you mean',"When I say, 'hello, pleased to meet you, what is it?', I actually mean theres a giant amphibian about to stick its finger up your nose. It should be obvious."),3,'sarcastic')
+                self.autoprint(s.reply(question,'who are you',"Now why would I tell you that?"),3,'amused')
+                self.autoprint(s.reply(question,'shut up',"Now what is the logic in that? You activated me in the first place. Don't be silly."),3,'standard')
+                self.autoprint(s.reply(question,'help',"No. Why should I help you?"),3,'annoyed')
+                self.autoprint(s.reply(question,'idiot',"That wasn't very civil. You would be the idiot to continue talking that way..."),3,'angry')
+                self.greply(question,'dumb',"I am a very sophisticated program. I am not 'dumb'.",3,'annoyed')
+                self.greply(question,'where',"I am not telling you where anything is. You are supposed to explore",3,'standard')
+                self.greply(question,'what',"I have no good reason to answer your question.",3,'standard')
+                self.greply(question,'how',"There is no logical cause for you to ask a question involving how. I will not answer this.",3,'annoyed')
+                self.greply(question,'who',"I am not going to answer that question.",3,'standard')
+                self.greply(question,'when',"what are you asking that for? when? no.",3,'standard')
+                #self.greply(question,'',"",3,'')
+                #self.greply(question,'',"",3,'')
+                #self.greply(question,'',"",3,'')
+                #self.greply(question,'',"",3,'')
+                #self.greply(question,'',"",3,'')
+                #self.greply(question,'',"",3,'')
+                #self.greply(question,'',"",3,'')
+                question2 = s.ask(self.gprint("Anyway, good weather, isn't it? : ",'standard',False))
+                self.greply(question,'not',"it's not good weather? well I wouldn't know, being a program without that data and all, but that's sounding awfully pessimistic to me.",3,'standard')
+                self.greply(question,'indeed',"actually I don't know the weather but I'm sure it's very good",3,'quiet')
+                self.greply(question,'yes',"well anyway, bye then. nice chatting with you.",3,'')
+                #self.greply(question,'sunny',"",3,'')
+                #self.greply(question,'rainy',"",3,'')
+                #self.greply(question,'night',"",3,'')
+                #self.greply(question,'daytime',"",3,'')
+                #self.greply(question,'information',"",3,'')
+                #self.greply(question,'help',"",3,'')
