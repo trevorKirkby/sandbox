@@ -2,6 +2,7 @@ def isInsult(string,responseModifier = None,responseBool=True):
         identified = False
         identified2 = False
         negation = False
+        string = text.split()
         if responseModifier == 'cranky':
                 for word in string:
                         if word == "shut":
