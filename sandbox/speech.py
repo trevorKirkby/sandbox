@@ -48,7 +48,8 @@ def isIn(qname,say):
                 found = True
         return found
 
-def reply(qname,say,reply,returnBool=False,reverseBool=False):
+def reply(qname,say,reply,returnBool=True,reverseBool=False,directedAt='me'):
+        #after dinner incorporate negatoried and directed at, for example if told to find if the word idiot is directed at self, will not trigger in these times because of this: your not an idiot,  or he is an idiot
         found = isIn(qname,say)
         if reverseBool == False and found == True:
                 if returnBool == True:

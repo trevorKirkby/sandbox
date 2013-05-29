@@ -1,4 +1,6 @@
-def isInsult(string,responseModifier = None,responseBool=True):
+import speech as sp
+
+def isInsult(string,responseModifier = 'random',responseBool=True):
         identified = False
         identified2 = False
         negation = False
@@ -18,6 +20,13 @@ def isInsult(string,responseModifier = None,responseBool=True):
                                 if responseBool == True:
                                         print 'you are an idiot! go away!'
                                 return True
+        elif responseModifier == 'other':
+                if sp.isIn(string,'your dumb'):
+                        if responseBool == True:
+                                print 'no you are dumb'
+                        return True
+        else:
+                print 'Error: Insults Module: isInsult Function: Specify a response modifier'
 
 def giveInsult(insultWhat,degreeOfOffense,personalityModifier,Imaginativeness):
         return "you big frick!"
