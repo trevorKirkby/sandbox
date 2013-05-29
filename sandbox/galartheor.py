@@ -154,3 +154,7 @@ class samplePrinter(gProg):
                 print " "
                 self.autoprint('you may also notice executables are extremely cleaned up and fully functional, and that the ps1 is waaay cooler. That is about it.')
                 print ""
+
+class prog():
+        def __init__():
+                pass
