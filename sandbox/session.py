@@ -1,6 +1,8 @@
 #to do next: goto/cat . fixup, tab and up arrow completions, mark command, and insult expansions, and add to autoprint so you may specify modifier if you dont want fully automatized, and make makdir methods for multiple node types, and addBasicBarrierTypes in paths, and basic program fill in over skeloton outlined in call function and basic conversational modules added to programs and basic sandbox in sandbox method for paths and ask() and reply() functions and progMove functions and progMovePlayer functions and progcolor/speech functions and non gprog general personality and feelings Stores and make largescale directory functions to create an entire tree in one functioncall and make globbing and make a door function that prestructures a program already so all it needs is basic response to circumstance feilds filled in, and basic modifiers like code included or question or key required included or persuasion required, and a random choice from a small number of basic configurations and order of typed responses to appear normal, and make a similar preset for moving 'people', for stationary personality terminals, for stationary tool terminals, for animation programs(part of upper categories), and add cart and items variables, and add inGameEasterEgg variables, and add outOfGameEasterEggRepositories, and add base skelaton mainfraims for guiding gprogs and imag+text puzzles withpoint and click and features for detterents and penalties such as prisons, decodings, and sendbacks wrapped up in callable functions, and make adition to program in progress logical boundaries to prevent unraveling of hallenge by user past building of it, and finnally make a secret testing and way past end easter egg capsule with window travel everywhere, cool terminals, further locked testing equipment used by builder of prog with this as home dir, and various challenge plot location insertions, as well as themeduseful stuff for a secret program operative abse etc, and finnally fix up those for loop stuffs with text.split in the insult module.
 #also make a 'spellcheck' in commands, that will autocorrect commands after you press enter, counting on the fact that there are only ten commands anyhow
 
+import readline
+
 from termcolor import colored, cprint
 
 class Session:
@@ -56,11 +58,18 @@ class Session:
     def shell(self,prompt):
         while True:
             try:
-                # Prompt the user for a new command
-                #cprint(self.pwd.name, 'yellow', attrs=['bold'])
-                print colored(self.home.name, "green", attrs=['bold','dark','underline']),
-                print colored(self.pwd.name, "yellow", attrs=['bold']),
-                cmdline = raw_input(prompt)
+                # Prompt the user for a new command. Non-printing characters mess up readline
+                # unless they are delimted with \001...\002. For details, see:
+                # http://stackoverflow.com/questions/9468435/look-how-to-fix-column-calculation-in-python-readline-if-use-color-prompt
+                # bracketing color control sequences should work but doesn't seem to. The problem can
+                # be reproduced using raw_input('\001\002> ')
+                thisprompt = (
+                    '\001' +
+                    colored('\002'+self.home.name+'\001', "green", attrs=['bold','dark','underline'])
+                    + '\002 \001' +
+                    colored('\002'+self.pwd.name+'\001', "yellow", attrs=['bold'])
+                    + '\002'+ prompt)
+                cmdline = raw_input(thisprompt)
                 # Break the command line into an argv list
                 argv = cmdline.split()
                 if len(argv) == 0:
