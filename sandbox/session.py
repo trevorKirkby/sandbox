@@ -133,6 +133,21 @@ class Session:
     def whoami_builtin(self,argv):
         cprint('Seriously???', 'yellow', 'on_yellow', attrs=['bold','dark','underline'])
 
+    def cd_builtin(self,argv):
+        #if there is no second argument go home
+        if len(argv) == 1:
+            self.pwd = self.home
+        # otherwise, use the second arg and ignore any extra ones
+        else:
+            try:
+                node = self.find(argv[1])
+                if not node.isDir():
+                    print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
+                else:
+                    self.pwd = node
+            except RuntimeError,e:
+                print '%s: %s: %s' % (self.name,argv[0],str(e))
+
     def goto_builtin(self,argv):
         #if there is no second argument go home like in cd
         if len(argv) == 1:
