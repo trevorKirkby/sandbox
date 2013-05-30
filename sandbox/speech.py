@@ -35,7 +35,7 @@ def respond(qname,say,reply,returnBool=True,reverseBool=False):
 
 def isIn(qname,say):
         said = qname.split()
-        identify = reply.split()
+        identify = say.split()
         index = range(len(said))
         index2 = range(len(identify))
         found = False
@@ -51,15 +51,17 @@ def isIn(qname,say):
 def reply(qname,say,reply,returnBool=True,reverseBool=False,directedAt='me'):
         #after dinner incorporate negatoried and directed at, for example if told to find if the word idiot is directed at self, will not trigger in these times because of this: your not an idiot,  or he is an idiot, also paralell synonyms, such as your and idiot and your stupid, and basic speech formatting, such as your an idiot and you are an idiot
         found = isIn(qname,say)
-        if reverseBool == False and found == True:
-                if returnBool == True:
-                        return reply
-                elif returnBool == False:
-                        print reply
-                else:
-                        print 'Error: Speech: Reply Function: Specify a True or False return boolean'
-                        raise KeyboardInterrupt
-        elif reverseBool == True and found == False:
+        if reverseBool == False:
+                if found == True:
+                        if returnBool == True:
+                                return reply
+                        elif returnBool == False:
+                                print reply
+                        else:
+                                print 'Error: Speech: Reply Function: Specify a True or False return boolean'
+                                raise KeyboardInterrupt
+        elif reverseBool == True:
+                if found == False:
                         if returnBool == True:
                                 return reply
                         elif returnBool == False:

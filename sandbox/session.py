@@ -85,7 +85,7 @@ class Session:
             except KeyboardInterrupt:
                 print
             except EOFError:
-                pass
+                print 'mash: EOF Error'
     # command handlers go here
     def exit_builtin(self,argv):
         print 'exit'
@@ -125,7 +125,7 @@ class Session:
             # Print dir name if we got more than 1 arg
             if len(argv) > 2:
                 print '%s:' % name
-            # Print dir contents in alphabetical order
+            # Print dir contents in alphabetical order, where it gets colors
             for childname in sorted(dirs[name].children.iterkeys()):
                     print ('%-16s' % childname),
             print
