@@ -1,5 +1,6 @@
 class Node:
     def __init__(self,name):
+        #you could shift a node by changing its parent, even across trees, just with a different 'directory'. why cant you do the same to a session's pwd?
         self.name = name
         self.parent = None
     # Returns our absolute path as a string
@@ -12,14 +13,41 @@ class Node:
         return '/'.join(path)
     def isExc(self):
         return False
-        
-class File(Node):
-    def __init__(self,name,contents=None):
-        Node.__init__(self,name)
-        self.isFile = True
-        self.contents = contents
     def isDir(self):
         return False
+    def isFile(self):
+        return False
+    def isGate(self):
+        return False
+    def isHold(self):
+        return False
+    def isObj(self):
+        return False
+    def isPerson(self):
+        return False
+        
+class File(Node):
+    def __init__(self,name,contents=" "):
+        Node.__init__(self,name)
+        self.contents = contents
+    def isFile(self):
+        return True
+
+class obj(Node):
+    def __init__(self,name,contents=" "):
+        Node.__init__(self,name)
+        self.taken = False
+        self.contents = contents
+    def isObj(self):
+        if self.taken == False:
+            return True
+        else:
+            return False
+    def isFile(self):
+        if self.taken == False:
+            return False
+        else:
+            return True
 
 class Directory(Node):
     def __init__(self,name,look):
@@ -31,27 +59,18 @@ class Directory(Node):
         node.parent = self
         self.children[node.name] = node
         return node
-    # Makes and returns an empty subdirectory
-    def mkdir(self,name,look):
-        return self.add(Directory(name,look))
-    def isDir(self):
-        return True
-
-class LDirectory(Directory):
-#locked directory, ls disabled
-    def __init__(self,name,look):
-        self.children = { }
-        self.look = look
-    # Add a generic node
-    def add(self,node):
-        node.parent = self
-        self.children[node.name] = node
+    def remove(self,node):
+        newChildren = {}
+        for thing in self.children.keys():
+            if thing != node.name:
+                newChildren[thing] = self.children[thing]
+        self.children = newChildren
         return node
     # Makes and returns an empty subdirectory
     def mkdir(self,name,look):
         return self.add(Directory(name,look))
     def isDir(self):
-        return False
+        return True
 
 class Filesystem(Directory):
     def __init__(self,look):

@@ -1,12 +1,18 @@
 import filesystem as fs
 import insult
+import speech
+#above are specialized programs made for this program's functionality
+#below are regular, universally importable packages
 import time
+import random
+from termcolor import colored, cprint
+import sys
+import tty
+import termios
 
 class program(fs.Node):
         def __init__(self,name):
                 fs.Node.__init__(self,name)
-        def isDir(self):
-                return False
         def isExc(self):
                 return True
 
@@ -17,12 +23,60 @@ class path(fs.Directory):
                 self.children = { }
                 self.passing = None
                 self.isProg = True
-        def isDir(self):
-                return False
         def isExc(self):
                 return True
-        #later dispense with all these isExc stuff and just give every class a self.type = 'file' or 'program' or 'directory'. That simple.
+        def isDir(self):
+                return False
+        def isGate(self):
+                return True
 
+
+class objHold(path):
+        def __init__(self,name,look):
+                path.__init__(self,name,look)
+        def isHold(self):
+                return True
+
+class Person(program):
+        def __init__(self,name):
+                program.__init__(self,name)
+        def move(self,directory):
+                self.parent.remove(self)
+                directory.add(self)
+        def isPerson(self):
+                return True
+        def say(self,text,mood='norm',enter=True):
+                if mood == 'norm':
+                        text = colored(text,'yellow',attrs=['bold'])
+                if mood == 'angry':
+                        text = colored(text,'red',attrs=['bold'])
+                if mood == 'happy':
+                        text = colored(text,'green',attrs=['bold'])
+                if mood == 'scared':
+                        text = colored(text,'magenta',attrs=['bold'])
+                if mood == 'excited':
+                        text = colored(text,'white',attrs=['bold'])
+                if mood == 'sad':
+                        text = colored(text,'grey',attrs=['bold'])
+                fd = sys.stdin.fileno()
+                oldSet = termios.tcgetattr(fd)
+                tty.setraw(sys.stdin)
+                for word in text:
+		        randthing = random.random()
+		        randVariable = float(randthing/7)
+		        sys.stdout.write(word)
+		        sys.stdout.flush()
+		        time.sleep(randVariable)
+                termios.tcsetattr(fd, termios.TCSADRAIN, oldSet)
+                if enter == True:
+                        print ' '
+        def ask(self,question,mood='norm'):
+                self.say(question,mood,enter=False)
+                variable = raw_input(' : ',)
+                return variable
+                
+
+'''
 class doorway(path):
         #locks is a string of 'PassCode','KeyObj','Qst','Persuade',or 'none'. default = 'none', is a list so can be more barriers though
         #sent config variable may be 1,2,3,4,5,or 6. Random additions puts this at either 1,2,3,4,5,6,7,8,or 9. factoring in aditions, this should still form a spectrum, with three distinct areas.
@@ -54,9 +108,7 @@ class doorway(path):
                         print 'on the upper side of config spectrum'
                 if self.config == 1:
                         print 'lower extreme of config spectrum'
-
-
-
+'''
 
 
 
@@ -89,7 +141,8 @@ class rootAI(program):
                         print "that's it! i'm forcing you to leave! then shutting down!"
                         return False
                 #if/for boundary
-                for word in variable:
+                variable=text.split()
+                for word in text:
                         if word == 'information':
                                 print "i do have some information you might want but you gotta ask for the correct information in the first place. I won't help you unless you get it right."
                 thing = raw_input("k bye then! leave and don't come back! ")
@@ -107,3 +160,63 @@ class gateway(path):
                 else:
                         print 'WRONG!!!'
                         return None
+
+class chest(objHold):
+        def __init__(self):
+                self.done=False
+                objHold.__init__(self,'chest','You are currently squeezed inside of an antique wooden chest. There is not a lot to see.')
+        def execute(self):
+                if self.done==True:
+                        print 'I thought i told you never to come back! get out!'
+                        raise SystemExit
+                print "You don't get entry. Sorry. Actually, sorry about this revision, i'm not sorry. Anyway, I don't have any good reason to let you get what's inside this chest."
+                time.sleep(5)
+                print 'well? leave!'
+                time.sleep(5)
+                thing = raw_input("why are you still here?")
+                if thing == 'let me in':
+                        print 'no. give me a good reason to.'
+                elif speech.isIn(thing,"I'll go"):
+                        print 'good.'
+                        raise KeyboardInterrupt
+                elif speech.isIn(thing,'help'):
+                        print 'nope, no help'
+                elif speech.isIn(thing,'idiot'):
+                        print 'thats it!'
+                        return False
+                else:
+                        print '"', thing, '"', 'Your not giving me any reason to actually care about letting you in! You cant, and even if you could you individually would probably fail to work out how! bye!'
+                time.sleep(5)
+                thing = raw_input("clearly your not leaving, so I'll make you a deal. I'll let you in, provided you never come back. Deal? ")
+                if thing == 'yes':
+                        print 'good'
+                        self.done = True
+                        return True
+                elif thing == 'deal':
+                        print 'good'
+                        self.done = True
+                        return True
+                elif thing == 'okay':
+                        print 'good'
+                        self.done = True
+                        return True
+                else:
+                        print 'if you wont say yes to this than get lost!'
+                        return False
+
+class bob(Person):
+        def __init__(self):
+                Person.__init__(self,'bob')
+        def execute(self):
+                #say(text,mood=norm) ask(text,mood=norm) and move(node)
+                self.say('hello, how are you. i am a program, yet i can move through directories, and talk, simulating a person.')
+                self.say('I can also talk in various voices','angry')
+                variableA = self.ask('i can also ask questions, easily. would you like me to move to directory ..? y/N')
+                if variableA == 'y':
+                        if self.parent.parent != None:
+                                self.say('okay... hold on a sec.')
+                                self.move((self.parent).parent)
+                        else:
+                                self.say('sorry, but i cant do that, because im in root directory.')
+                else:
+                        self.say('okay then. bye for now.')

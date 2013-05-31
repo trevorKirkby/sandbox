@@ -55,7 +55,7 @@ class gProg(ex.program):
                                 elif adj == 'confused':
                                         newText.append(colored(word, 'cyan', 'on_white', attrs=['dark']))
                                 elif adj == 'annoyed':
-                                        newText.append(colored(word, 'yellow', 'on_yellow', attrs=['bold','dark','underline']))
+                                        newText.append(colored(word, 'yellow', attrs=['underline']))
                                 elif adj == 'sarcastic':
                                         newText.append(colored(word, 'white', 'on_yellow', attrs=['bold','underline']))
                                 elif adj == 'dramatic':

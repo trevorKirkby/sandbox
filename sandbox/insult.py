@@ -1,6 +1,6 @@
 import speech as sp
 
-def isInsult(string,responseModifier = 'random',responseBool=True):
+def isInsult(text,responseModifier = 'random',responseBool=True):
         identified = False
         identified2 = False
         negation = False

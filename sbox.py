@@ -22,6 +22,9 @@ trevor.add(gate)
 filething = fs.File('file.txt','blub blub im a fish')
 desktop.add(filething)
 
+test = ex.bob()
+desktop.add(test)
+
 a = fs.File('a.txt','The quick brown fox...')
 trevor.add(a)
 
@@ -32,6 +35,9 @@ ryan = users.mkdir('ryan','blank')
 
 c = fs.File('c.txt','Here I am!')
 ryan.add(c)
+
+woodenChest = ex.chest()
+ryan.add(woodenChest)
 
 s = sandbox.session.Session(rootdir,'mash',trevor)
 s.shell('/$: ')

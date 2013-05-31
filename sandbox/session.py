@@ -1,5 +1,9 @@
 #to do next: goto/cat . fixup, tab and up arrow completions, mark command, and insult expansions, and add to autoprint so you may specify modifier if you dont want fully automatized, and make makdir methods for multiple node types, and addBasicBarrierTypes in paths, and basic program fill in over skeloton outlined in call function and basic conversational modules added to programs and basic sandbox in sandbox method for paths and ask() and reply() functions and progMove functions and progMovePlayer functions and progcolor/speech functions and non gprog general personality and feelings Stores and make largescale directory functions to create an entire tree in one functioncall and make globbing and make a door function that prestructures a program already so all it needs is basic response to circumstance feilds filled in, and basic modifiers like code included or question or key required included or persuasion required, and a random choice from a small number of basic configurations and order of typed responses to appear normal, and make a similar preset for moving 'people', for stationary personality terminals, for stationary tool terminals, for animation programs(part of upper categories), and add cart and items variables, and add inGameEasterEgg variables, and add outOfGameEasterEggRepositories, and add base skelaton mainfraims for guiding gprogs and imag+text puzzles withpoint and click and features for detterents and penalties such as prisons, decodings, and sendbacks wrapped up in callable functions, and make adition to program in progress logical boundaries to prevent unraveling of hallenge by user past building of it, and finnally make a secret testing and way past end easter egg capsule with window travel everywhere, cool terminals, further locked testing equipment used by builder of prog with this as home dir, and various challenge plot location insertions, as well as themeduseful stuff for a secret program operative abse etc, and finnally fix up those for loop stuffs with text.split in the insult module.
 #also make a 'spellcheck' in commands, that will autocorrect commands after you press enter, counting on the fact that there are only ten commands anyhow
+#new node-- pertaining to hidden stuff--print colored(('%-16s' % childname),'grey',attrs=['bold']),
+#color coding: gateway: dark green   moveProg(person): bold white   obj: cyan  ObjContain: bold yellow  hiddenDoor: bold grey
+#also make an alternating shell bg command so that programs can execute in background, complete with a time.sleep in bg function for these progs
+#sometime rename exc to ac, for access, and polish up error messages...
 
 import readline
 
@@ -11,6 +15,7 @@ class Session:
         self.name = name
         self.home = home
         self.pwd = home
+        self.own = []
     # expands the specified list of paths by replacing any leading ~
     def expand(self,paths):
         expanded = [ ]
@@ -127,7 +132,26 @@ class Session:
                 print '%s:' % name
             # Print dir contents in alphabetical order, where it gets colors
             for childname in sorted(dirs[name].children.iterkeys()):
-                    print ('%-16s' % childname),
+                    node = dirs[name].children[childname]
+                    if node.isDir() == True:
+                        print colored(('%-16s' % childname),'blue',attrs=['bold']),
+                    elif node.isFile() == True:
+                        print ('%-16s' % childname),
+                    elif node.isExc() == True:
+                        if node.isGate() == True:
+                            if node.isHold() == True:
+                                print colored(('%-16s' % childname),'yellow',attrs=['bold']),
+                            else:
+                                print colored(('%-16s' % childname),'magenta',attrs=['bold']),
+                        else:
+                            if node.isPerson() == True:
+                                print colored(('%-16s' % childname),'white',attrs=['bold']),
+                            else:
+                                print colored(('%-16s' % childname),'green',attrs=['bold']),
+                    elif node.isObj() == True:
+                        print colored(('%-16s' % childname),'cyan',attrs=['bold']),
+                    else:
+                        print colored(('%-16s' % childname+'--None'),'red',attrs=['bold']),
             print
 
     def whoami_builtin(self,argv):
@@ -188,7 +212,7 @@ class Session:
                 for name in self.pwd.children:
                     if name == argv[1]:
                         try:
-                            if self.pwd.children[name].isFile == True:
+                            if self.pwd.children[name].isFile() == True:
                                 print self.pwd.children[name].contents
                                 realFile = True
                         except:
@@ -238,3 +262,7 @@ class Session:
                     print self.name, ": exc:", argv[1], ": No such file or directory"
                 if realProg == None:
                     print self.name, ": exc:", argv[1], ": Not a program"
+
+    def take_builtin(self,argv):
+        pass
+        #if isobj == true, append obj to own, self.taken = True, now able to access use def...
