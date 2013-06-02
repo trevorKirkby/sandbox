@@ -1,8 +1,7 @@
-#to do next: goto/cat . fixup, tab and up arrow completions, mark command, and insult expansions, and add to autoprint so you may specify modifier if you dont want fully automatized, and make makdir methods for multiple node types, and addBasicBarrierTypes in paths, and basic program fill in over skeloton outlined in call function and basic conversational modules added to programs and basic sandbox in sandbox method for paths and ask() and reply() functions and progMove functions and progMovePlayer functions and progcolor/speech functions and non gprog general personality and feelings Stores and make largescale directory functions to create an entire tree in one functioncall and make globbing and make a door function that prestructures a program already so all it needs is basic response to circumstance feilds filled in, and basic modifiers like code included or question or key required included or persuasion required, and a random choice from a small number of basic configurations and order of typed responses to appear normal, and make a similar preset for moving 'people', for stationary personality terminals, for stationary tool terminals, for animation programs(part of upper categories), and add cart and items variables, and add inGameEasterEgg variables, and add outOfGameEasterEggRepositories, and add base skelaton mainfraims for guiding gprogs and imag+text puzzles withpoint and click and features for detterents and penalties such as prisons, decodings, and sendbacks wrapped up in callable functions, and make adition to program in progress logical boundaries to prevent unraveling of hallenge by user past building of it, and finnally make a secret testing and way past end easter egg capsule with window travel everywhere, cool terminals, further locked testing equipment used by builder of prog with this as home dir, and various challenge plot location insertions, as well as themeduseful stuff for a secret program operative abse etc, and finnally fix up those for loop stuffs with text.split in the insult module.
+#to do next: cat . fixup, tab completions, mark command, insult expansions, and make mkdir methods for multiple node types, and and basic conversational modules added to programs and basic sandbox in sandbox method for paths and ask() and reply() functions and progMove functions and progMovePlayer functions and progcolor/speech functions and non gprog general personality and feelings Stores and make largescale directory functions to create an entire tree in one functioncall and make globbing and make a door function that prestructures a program already so all it needs is basic response to circumstance feilds filled in, and basic modifiers like code included or question or key required included or persuasion required, and a random choice from a small number of basic configurations and order of typed responses to appear normal, and make a similar preset for moving 'people', for stationary personality terminals, for stationary tool terminals, for animation programs(part of upper categories), and add cart and items variables, and add inGameEasterEgg variables, and add outOfGameEasterEggRepositories, and add base skelaton mainfraims for guiding gprogs and imag+text puzzles withpoint and click and features for detterents and penalties such as prisons, decodings, and sendbacks wrapped up in callable functions, and make adition to program in progress logical boundaries to prevent unraveling of hallenge by user past building of it, and finnally make a secret testing and way past end easter egg capsule with window travel everywhere, cool terminals, further locked testing equipment used by builder of prog with this as home dir, and various challenge plot location insertions, as well as themeduseful stuff for a secret program operative abse etc, and finnally fix up those for loop stuffs with text.split in the insult module.
 #also make a 'spellcheck' in commands, that will autocorrect commands after you press enter, counting on the fact that there are only ten commands anyhow
 #new node-- pertaining to hidden stuff--print colored(('%-16s' % childname),'grey',attrs=['bold']),
-#color coding: gateway: dark green   moveProg(person): bold white   obj: cyan  ObjContain: bold yellow  hiddenDoor: bold grey
-#also make an alternating shell bg command so that programs can execute in background, complete with a time.sleep in bg function for these progs
+#color coding: obj: cyan  hiddenDoor: bold grey
 #sometime rename exc to ac, for access, and polish up error messages...
 
 import readline
@@ -111,6 +110,8 @@ class Session:
             try:
                 node = self.find(name)
                 if node.isDir():
+                    dirs[name] = node
+                elif node.isGate():
                     dirs[name] = node
                 else:
                     files[name] = node
@@ -264,5 +265,32 @@ class Session:
                     print self.name, ": exc:", argv[1], ": Not a program"
 
     def take_builtin(self,argv):
-        pass
-        #if isobj == true, append obj to own, self.taken = True, now able to access use def...
+        if len(argv) == 1:
+            print self.name, ": take: specify and object... sheesh."
+        else:
+            if argv[1] == '--help':
+                print "Nope! You don't get help, so work it out okay?"
+            elif argv[1] == '.' or argv[1] == '..':
+                print self.name, ': take: Is a directory. You should really know better.'
+            else:
+                node = self.find(argv[1])
+                if node.isObj() == True:
+                    self.own.append(node)
+                    node.taken = True
+    def nodes_builtin(self,argv):
+        for child in self.pwd.children:
+            print colored((child),'white',attrs=['bold'])
+    def use_builtin(self,argv):
+        if len(argv) == 1:
+            print self.name, ": use: specify and object... sheesh."
+        else:
+            if argv[1] == '--help':
+                print "No help allowed. What word about challenge don't you understand? Theres only even one waord, so that's pretty sad."
+            else:
+                find = False
+                for thing in self.own:
+                    if thing.name == argv[1]:
+                        print 'using', argv[1], '...'
+                        find = True
+                if find == False:
+                    print self.name, ": use: You don't even have an object called", argv[1], "! Get it togethor! You clearly can't use something you don't own!"

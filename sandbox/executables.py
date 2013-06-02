@@ -34,6 +34,7 @@ class path(fs.Directory):
 class objHold(path):
         def __init__(self,name,look):
                 path.__init__(self,name,look)
+                self.children = { }
         def isHold(self):
                 return True
 
@@ -165,6 +166,7 @@ class chest(objHold):
         def __init__(self):
                 self.done=False
                 objHold.__init__(self,'chest','You are currently squeezed inside of an antique wooden chest. There is not a lot to see.')
+                self.children = { }
         def execute(self):
                 if self.done==True:
                         print 'I thought i told you never to come back! get out!'
@@ -185,7 +187,7 @@ class chest(objHold):
                         print 'thats it!'
                         return False
                 else:
-                        print '"', thing, '"', 'Your not giving me any reason to actually care about letting you in! You cant, and even if you could you individually would probably fail to work out how! bye!'
+                        print '"', thing, '"???!', 'Your not giving me any reason to actually care about letting you in! You cant, and even if you could you individually would probably fail to work out how! bye!'
                 time.sleep(5)
                 thing = raw_input("clearly your not leaving, so I'll make you a deal. I'll let you in, provided you never come back. Deal? ")
                 if thing == 'yes':

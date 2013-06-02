@@ -79,3 +79,17 @@ class Filesystem(Directory):
 class World(Directory):
     def __init__(self,name,look):
         Directory.__init__(self,name,look)
+
+
+
+#objects below:
+
+
+class key(obj):
+        def __init__(self):
+                obj.__init__(self,'key','A key shaped depression in the chest bottom...')
+                self.used = False
+        def use_key(self):
+                if self.taken == True and self.used == False:
+                        mysteriousdoor = users.mkdir('mysterious door','Nothing inside. But the key did create this directory out of thin air. Cool huh?')
+                        self.used = True

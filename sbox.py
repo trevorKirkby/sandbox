@@ -39,5 +39,8 @@ ryan.add(c)
 woodenChest = ex.chest()
 ryan.add(woodenChest)
 
+keyObject = fs.key()
+woodenChest.add(keyObject)
+
 s = sandbox.session.Session(rootdir,'mash',trevor)
 s.shell('/$: ')
