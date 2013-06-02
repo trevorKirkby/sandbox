@@ -1,10 +1,20 @@
 #to do before challenge construct: clean up speech, make hidden dir class, and make permissions
 
 class Node:
-    def __init__(self,name):
+    def __init__(self,name,permissions):
         #you could shift a node by changing its parent, even across trees, just with a different 'directory'. why cant you do the same to a session's pwd?
         self.name = name
         self.parent = None
+        self.read = False
+        self.write = False
+        self.execute = False
+        for letter in permissions:
+            if letter == 'r':
+                self.read = True
+            if letter == 'w':
+                self.write = True
+            if letter == 'x':
+                self.execute = True
     # Returns our absolute path as a string
     def abspath(self):
         path = [ self.name ]
@@ -29,15 +39,15 @@ class Node:
         return False
         
 class File(Node):
-    def __init__(self,name,contents=" "):
-        Node.__init__(self,name)
+    def __init__(self,name,contents=" ",permissions='r'):
+        Node.__init__(self,name,permissions)
         self.contents = contents
     def isFile(self):
         return True
 
 class obj(Node):
-    def __init__(self,name,contents=" "):
-        Node.__init__(self,name)
+    def __init__(self,name,contents=" ",permissions='rx'):
+        Node.__init__(self,name,permissions)
         self.taken = False
         self.contents = contents
     def isObj(self):
@@ -52,8 +62,8 @@ class obj(Node):
             return True
 
 class Directory(Node):
-    def __init__(self,name,look):
-        Node.__init__(self,name)
+    def __init__(self,name,look,permissions='rx'):
+        Node.__init__(self,name,permissions)
         self.children = { }
         self.look = look
     # Add a generic node
@@ -69,18 +79,18 @@ class Directory(Node):
         self.children = newChildren
         return node
     # Makes and returns an empty subdirectory
-    def mkdir(self,name,look):
-        return self.add(Directory(name,look))
+    def mkdir(self,name,look,permissions='rx'):
+        return self.add(Directory(name,look,permissions))
     def isDir(self):
         return True
 
 class Filesystem(Directory):
     def __init__(self,look):
-        Directory.__init__(self,'',look)
+        Directory.__init__(self,'',look,'rx')
 
-class World(Directory):
+class SuperRoot(Directory):
     def __init__(self,name,look):
-        Directory.__init__(self,name,look)
+        Directory.__init__(self,name,look,'rx')
 
 
 

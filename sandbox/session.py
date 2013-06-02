@@ -134,6 +134,9 @@ class Session:
             # Print dir contents in alphabetical order, where it gets colors
             for childname in sorted(dirs[name].children.iterkeys()):
                     node = dirs[name].children[childname]
+                    if node.read == False:
+                        print self.name, ": ls: According to the challenge, you don't have permissions to do that here. You don't have read permissions on this node, which includes ls."
+                        return
                     if node.isDir() == True:
                         print colored(('%-16s' % childname),'blue',attrs=['bold']),
                     elif node.isFile() == True:
@@ -169,7 +172,10 @@ class Session:
                 if not node.isDir():
                     print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
                 else:
-                    self.pwd = node
+                    if node.execute == False:
+                        print self.name, ": cd: You do not have execute permissions to cd into this directory."
+                    else:
+                        self.pwd = node
             except RuntimeError,e:
                 print '%s: %s: %s' % (self.name,argv[0],str(e))
 
@@ -209,22 +215,24 @@ class Session:
             if argv[1] == '--help':
                 print "No! You don't get help. This is a challenge. Work it out. Meow."
             else:
-                realFile = False
-                for name in self.pwd.children:
-                    if name == argv[1]:
-                        try:
-                            if self.pwd.children[name].isFile() == True:
-                                print self.pwd.children[name].contents
-                                realFile = True
-                        except:
-                            realFile = None
-                if realFile == False:
-                    print self.name, ": cat:", argv[1], ": No such file or directory"
-                if realFile == None:
+                try:
+                    node = self.find(argv[1])
+                    if node.read == False:
+                        print self.name, ': cat:', argv[1], ': You are not granted read permissions on this node.'
+                    if node.isFile():
+                        print node.contents
+                except RuntimeError,e:
+                    print '%s: %s: %s' % (self.name,argv[0],str(e))
+                if node.isDir():
                     print self.name, ": cat:", argv[1], ": Is a directory"
+                if node.isExc():
+                    print self.name, ": cat:", argv[1], ": Is an executable"
 
-    def look_builtin(self,argv):    
+    def look_builtin(self,argv):
+        if self.pwd.read == False:
+            print self.name, ': look: Your current directory does not have read permissions'    
         print self.pwd.look
+#sometime, you should meld look and cat, as they do about the same thing, just one for files and one for dirs.
 
     def find_builtin(self,argv):
         for path in argv[1:]:
@@ -248,6 +256,9 @@ class Session:
                     if name == argv[1]:
                         if self.pwd.children[name].isExc() == True:
                             if True:
+                                if self.pwd.children[name].execute == False:
+                                    print self.name, ': exc: You do not have execute permissions for this node'
+                                    return
                                 passing = self.pwd.children[name].execute()
                                 #true means you advance to directory, false means your booted back to homedir, none means nothing happens
                                 if passing == True:
@@ -273,11 +284,18 @@ class Session:
             elif argv[1] == '.' or argv[1] == '..':
                 print self.name, ': take: Is a directory. You should really know better.'
             else:
-                node = self.find(argv[1])
+                try:
+                    node = self.find(argv[1])
+                    if node.execute == False:
+                        print self.name, ': take: You do not have execute permissions on this node, which includes "take"'
+                        return
+                except RuntimeError,e:
+                    print '%s: %s: %s' % (self.name,argv[0],str(e))
                 if node.isObj():
                     self.own.append(node)
                     node.taken = True
     def nodes_builtin(self,argv):
+        #tells you all nodes on self.pwd without any restrictions(for example permissions), color coding, or fancy touches. Useful for testing.
         for child in self.pwd.children:
             print colored((child),'white',attrs=['bold'])
     def use_builtin(self,argv):
@@ -290,7 +308,11 @@ class Session:
                 find = False
                 for thing in self.own:
                     if thing.name == argv[1]:
-                        thing.use()
+                        if thing.execute == True:
+                            thing.use()
+                        else:
+                            print self.name, ': use: This object does not give you executables permissions'
+                            return
                         find = True
                 if find == False:
                     print self.name, ": use: You don't even have an object called", argv[1], "! Get it togethor! You clearly can't use something you don't own!"

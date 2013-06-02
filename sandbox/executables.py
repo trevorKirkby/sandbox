@@ -11,15 +11,15 @@ import tty
 import termios
 
 class program(fs.Node):
-        def __init__(self,name):
-                fs.Node.__init__(self,name)
+        def __init__(self,name,permissions = 'x'):
+                fs.Node.__init__(self,name,permissions)
         def isExc(self):
                 return True
 
 
 class path(fs.Directory):
-        def __init__(self,name,look):
-                fs.Directory.__init__(self,name,look)
+        def __init__(self,name,look,permissions = 'rx'):
+                fs.Directory.__init__(self,name,look,permissions)
                 self.children = { }
                 self.passing = None
                 self.isProg = True
@@ -32,15 +32,15 @@ class path(fs.Directory):
 
 
 class objHold(path):
-        def __init__(self,name,look):
-                path.__init__(self,name,look)
+        def __init__(self,name,look,permissions = 'rx'):
+                path.__init__(self,name,look,permissions)
                 self.children = { }
         def isHold(self):
                 return True
 
 class Person(program):
-        def __init__(self,name):
-                program.__init__(self,name)
+        def __init__(self,name,permissions = 'x'):
+                program.__init__(self,name,permissions)
         def move(self,directory):
                 self.parent.remove(self)
                 directory.add(self)
@@ -189,7 +189,7 @@ class chest(objHold):
                 else:
                         print '"', thing, '"???!', 'Your not giving me any reason to actually care about letting you in! You cant, and even if you could you individually would probably fail to work out how! bye!'
                 time.sleep(5)
-                thing = raw_input("clearly your not leaving, so I'll make you a deal. I'll let you in, provided you never come back. Deal? ")
+                thing = raw_input("clearly your not leaving, so I'll make you a deal. I'll let you in provided you never come back. Deal? ")
                 if thing == 'yes':
                         print 'good'
                         self.done = True
