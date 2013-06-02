@@ -7,14 +7,16 @@ class Node:
         self.parent = None
         self.read = False
         self.write = False
-        self.execute = False
+        self.execute2 = False
         for letter in permissions:
             if letter == 'r':
                 self.read = True
-            if letter == 'w':
+            elif letter == 'w':
                 self.write = True
-            if letter == 'x':
+            elif letter == 'x':
                 self.execute = True
+            else:
+                pass
     # Returns our absolute path as a string
     def abspath(self):
         path = [ self.name ]

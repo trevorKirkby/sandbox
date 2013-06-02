@@ -256,7 +256,7 @@ class Session:
                     if name == argv[1]:
                         if self.pwd.children[name].isExc() == True:
                             if True:
-                                if self.pwd.children[name].execute == False:
+                                if self.pwd.children[name].execute2 == False:
                                     print self.name, ': exc: You do not have execute permissions for this node'
                                     return
                                 passing = self.pwd.children[name].execute()

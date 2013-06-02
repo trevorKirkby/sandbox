@@ -5,6 +5,8 @@ import sandbox.galartheor as gp
 
 rootdir = fs.Filesystem('this is rootDir. Cool command isnt it?')
 
+restrict = rootdir.mkdir('restricted','how the heck did you get in here???',' ')
+
 users = rootdir.mkdir('users','user folder, two doors, yadda yadda ya...')
 dog = ex.rootAI()
 rootdir.add(dog)
@@ -12,7 +14,8 @@ demo = gp.samplePrinter()
 rootdir.add(demo)
 
 trevor = users.mkdir('trevor','welcome to your home directory. This is a sandbox simulation and all that.')
-desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?','rx')
+desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?')
+print desktop.read
 #talker = gp.program()
 #trevor.add(talker)
 
