@@ -1,3 +1,5 @@
+#to do before challenge construct: clean up speech, make hidden dir class, and make permissions
+
 class Node:
     def __init__(self,name):
         #you could shift a node by changing its parent, even across trees, just with a different 'directory'. why cant you do the same to a session's pwd?
@@ -89,7 +91,10 @@ class key(obj):
         def __init__(self):
                 obj.__init__(self,'key','A key shaped depression in the chest bottom...')
                 self.used = False
-        def use_key(self):
+                self.taken = False
+        def use(self):
                 if self.taken == True and self.used == False:
-                        mysteriousdoor = users.mkdir('mysterious door','Nothing inside. But the key did create this directory out of thin air. Cool huh?')
+                        print 'key is used. type solve to get through the gate. also, pay a visit to bob.'
                         self.used = True
+                else:
+                        print 'key already used'

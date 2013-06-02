@@ -274,7 +274,7 @@ class Session:
                 print self.name, ': take: Is a directory. You should really know better.'
             else:
                 node = self.find(argv[1])
-                if node.isObj() == True:
+                if node.isObj():
                     self.own.append(node)
                     node.taken = True
     def nodes_builtin(self,argv):
@@ -290,7 +290,7 @@ class Session:
                 find = False
                 for thing in self.own:
                     if thing.name == argv[1]:
-                        print 'using', argv[1], '...'
+                        thing.use()
                         find = True
                 if find == False:
                     print self.name, ": use: You don't even have an object called", argv[1], "! Get it togethor! You clearly can't use something you don't own!"
