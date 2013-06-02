@@ -300,7 +300,7 @@ class Session:
             node = self.find(child)
             if len(argv) > 1:
                 if argv[1] == '-l':
-                    text = str(child+'     '+'r:'+node.read+'w:'+node.write+'x:'+node.execute2)
+                    text = str(child+'     '+'   r:'+str(node.read)+'   w:'+str(node.write)+'   x:'+str(node.execute2))
                 elif argv[1] == '-a':
                     text = child
                 else:
