@@ -172,7 +172,7 @@ class Session:
                 if not node.isDir():
                     print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
                 else:
-                    if node.execute == False:
+                    if node.execute2 == False:
                         print self.name, ": cd: You do not have execute permissions to cd into this directory."
                     else:
                         self.pwd = node
@@ -297,7 +297,18 @@ class Session:
     def nodes_builtin(self,argv):
         #tells you all nodes on self.pwd without any restrictions(for example permissions), color coding, or fancy touches. Useful for testing.
         for child in self.pwd.children:
-            print colored((child),'white',attrs=['bold'])
+            node = self.find(child)
+            if len(argv) > 1:
+                if argv[1] == '-l':
+                    text = str(child+'     '+'r:'+node.read+'w:'+node.write+'x:'+node.execute2)
+                elif argv[1] == '-a':
+                    text = child
+                else:
+                    print self.name, ': nodes:', argv[1], ': No such operand'
+                    return
+            else:
+                text = child
+            print colored((text),'white',attrs=['bold'])
     def use_builtin(self,argv):
         if len(argv) == 1:
             print self.name, ": use: specify and object... sheesh."

@@ -14,7 +14,7 @@ class Node:
             elif letter == 'w':
                 self.write = True
             elif letter == 'x':
-                self.execute = True
+                self.execute2 = True
             else:
                 pass
         print 'name:', self.name, '   permissions:', permissions, '   read:', self.read, '   write:', self.write, '   execute:', self.execute2
