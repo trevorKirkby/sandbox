@@ -15,7 +15,6 @@ rootdir.add(demo)
 
 trevor = users.mkdir('trevor','welcome to your home directory. This is a sandbox simulation and all that.')
 desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?')
-print desktop.read
 #talker = gp.program()
 #trevor.add(talker)
 

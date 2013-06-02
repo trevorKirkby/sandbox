@@ -17,6 +17,7 @@ class Node:
                 self.execute = True
             else:
                 pass
+        print 'name:', self.name, '   permissions:', permissions, '   read:', self.read, '   write:', self.write, '   execute:', self.execute2
     # Returns our absolute path as a string
     def abspath(self):
         path = [ self.name ]
