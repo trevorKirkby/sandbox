@@ -176,7 +176,7 @@ class chest(objHold):
                 print 'well? leave!'
                 time.sleep(5)
                 thing = raw_input("why are you still here?")
-                if thing == 'let me in':
+                if speech.isIn(thing,'let me in'):
                         print 'no. give me a good reason to.'
                 elif speech.isIn(thing,"I'll go"):
                         print 'good.'

@@ -112,7 +112,7 @@ class Filesystem(Directory):
 
 class SuperRoot(Directory):
     def __init__(self,name,look):
-        Directory.__init__(self,name,look,'rx')
+        Directory.__init__(self,name,look,' ')
 
 
 

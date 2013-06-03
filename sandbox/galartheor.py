@@ -28,6 +28,8 @@ class gProg(ex.program):
                 self.persons = ['default','megalomaniac','uberDrama','stupid/borderlineStoned','genius','hyperAngry','spazzy','passiveAgressive','theta']
                 self.personalityBubble = self.persons[0]
                 self.STIPM = None
+                self.comments = {}
+                self.commentsLocation = 0
                 #remember- add a taunt instances program to give pre-typed taunts according to performance on the fly and according to mood, and an autotaunt piped through autoprint that gives a taunt depending on mood(some taunts are just your dumb some are more amusing)
         def wordByWordPrint(self,text,waitTime=2):
                 for word in text:

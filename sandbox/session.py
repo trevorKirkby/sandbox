@@ -296,7 +296,7 @@ class Session:
             else:
                 try:
                     node = self.find(argv[1])
-                    if node.execute == False:
+                    if node.execute2 == False:
                         print self.name, ': take: You do not have execute permissions on this node, which includes "take"'
                         return
                 except RuntimeError,e:
@@ -329,7 +329,7 @@ class Session:
                 find = False
                 for thing in self.own:
                     if thing.name == argv[1]:
-                        if thing.execute == True:
+                        if thing.execute2 == True:
                             thing.use()
                         else:
                             print self.name, ': use: This object does not give you executables permissions'
