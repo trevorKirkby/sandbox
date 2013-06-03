@@ -8,6 +8,8 @@ import readline
 
 from termcolor import colored, cprint
 
+import speech
+
 testMode = False
 
 class Session:
@@ -354,3 +356,5 @@ class Session:
                 if node.isPassage() == None:
                     if argv[1] == node.key:
                         node.found = True
+    def commands_buitin(self,argv):
+        speech.say('cd-- like normal system cd  ls-- like normal system ls but with no -a/l argv modifiers and new color coding  cat-- shows text in read permission granted files  whoami-- comments on that question  pwd-- prints current directory, might be disabled for most of challenge  find-- lets you find stuff will definetely be disabled in challenge but useful sandbox command  man-- tells you about commands  exc-- executes an executable  take-- takes an object, which later may be used  nodes-- simplified ls for testing purposes, as it has no restrictions and has a -l operand  use-- lets you use an object if you own it  decode-- with a modifier pertaining to something in the current directory, able to reveal hidden things...')
