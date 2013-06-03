@@ -1,5 +1,7 @@
 #to do before challenge construct: clean up speech, make hidden dir class, and make permissions
 
+import session
+
 class Node:
     def __init__(self,name,permissions):
         #you could shift a node by changing its parent, even across trees, just with a different 'directory'. why cant you do the same to a session's pwd?
@@ -17,7 +19,11 @@ class Node:
                 self.execute2 = True
             else:
                 pass
-        print 'name:', self.name, '   permissions:', permissions, '   read:', self.read, '   write:', self.write, '   execute:', self.execute2
+        try:
+            if session.testMode == True:
+                print 'name:', self.name, '   permissions:', permissions, '   read:', self.read, '   write:', self.write, '   execute:', self.execute2
+        except:
+            pass
     # Returns our absolute path as a string
     def abspath(self):
         path = [ self.name ]
@@ -87,6 +93,12 @@ class Directory(Node):
     def isDir(self):
         return True
 
+class hiddenDir(Directory):
+    def __init__(self,name,look,keyWord,permissions='rx'):
+        Directory.__init__(self,name,look,permissions)
+        self.key = keyWord
+        self.found = False
+
 class Filesystem(Directory):
     def __init__(self,look):
         Directory.__init__(self,'',look,'rx')
@@ -111,3 +123,7 @@ class key(obj):
                         self.used = True
                 else:
                         print 'key already used'
+
+class secretPassage(hiddenDir):
+        def __init__(self):
+                hiddenDir.__init__(self,'secretPassage','')

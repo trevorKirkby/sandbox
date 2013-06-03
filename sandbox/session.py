@@ -8,6 +8,8 @@ import readline
 
 from termcolor import colored, cprint
 
+testMode = False
+
 class Session:
     def __init__(self,fs,name,home):
         self.fs = fs
@@ -15,6 +17,7 @@ class Session:
         self.home = home
         self.pwd = home
         self.own = []
+        self.testMode = testMode
     # expands the specified list of paths by replacing any leading ~
     def expand(self,paths):
         expanded = [ ]
@@ -109,6 +112,9 @@ class Session:
         for name in argv[1:]:
             try:
                 node = self.find(name)
+                if node.read == False:
+                    print self.name, ": ls: According to the challenge, you don't have permissions to do that here. You don't have read permissions on this node, which includes ls."
+                    return
                 if node.isDir():
                     dirs[name] = node
                 elif node.isGate():
@@ -134,9 +140,6 @@ class Session:
             # Print dir contents in alphabetical order, where it gets colors
             for childname in sorted(dirs[name].children.iterkeys()):
                     node = dirs[name].children[childname]
-                    if node.read == False:
-                        print self.name, ": ls: According to the challenge, you don't have permissions to do that here. You don't have read permissions on this node, which includes ls."
-                        return
                     if node.isDir() == True:
                         print colored(('%-16s' % childname),'blue',attrs=['bold']),
                     elif node.isFile() == True:
@@ -300,7 +303,7 @@ class Session:
             node = self.find(child)
             if len(argv) > 1:
                 if argv[1] == '-l':
-                    text = str(child+'     '+'   r:'+str(node.read)+'   w:'+str(node.write)+'   x:'+str(node.execute2))
+                    text = str('%-16s'%child+'%-16s'%('r:'+str(node.read))+'%-16s'%('w:'+str(node.write))+'%-16s'%('x:'+str(node.execute2)))
                 elif argv[1] == '-a':
                     text = child
                 else:
