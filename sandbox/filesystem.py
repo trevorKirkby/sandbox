@@ -46,6 +46,8 @@ class Node:
         return False
     def isPerson(self):
         return False
+    def isPassage(self):
+        return False
         
 class File(Node):
     def __init__(self,name,contents=" ",permissions='r'):
@@ -98,6 +100,11 @@ class hiddenDir(Directory):
         Directory.__init__(self,name,look,permissions)
         self.key = keyWord
         self.found = False
+    def isPassage(self):
+        if self.found == False:
+            return None
+        else:
+            return True
 
 class Filesystem(Directory):
     def __init__(self,look):
@@ -119,11 +126,7 @@ class key(obj):
                 self.taken = False
         def use(self):
                 if self.taken == True and self.used == False:
-                        print 'key is used. type solve to get through the gate. also, pay a visit to bob.'
+                        print 'key is used. type solve to get through the gate. also, pay a visit to bob. Ps- there is something fishy about the rootAI'
                         self.used = True
                 else:
                         print 'key already used'
-
-class secretPassage(hiddenDir):
-        def __init__(self):
-                hiddenDir.__init__(self,'secretPassage','')

@@ -12,6 +12,8 @@ dog = ex.rootAI()
 rootdir.add(dog)
 demo = gp.samplePrinter()
 rootdir.add(demo)
+passage = fs.hiddenDir('secretPassage','a mysterious secret passage with big, secret stuff inside...','rootAI')
+rootdir.add(passage)
 
 trevor = users.mkdir('trevor','welcome to your home directory. This is a sandbox simulation and all that.')
 desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?')

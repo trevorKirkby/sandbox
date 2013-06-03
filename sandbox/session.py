@@ -141,7 +141,12 @@ class Session:
             for childname in sorted(dirs[name].children.iterkeys()):
                     node = dirs[name].children[childname]
                     if node.isDir() == True:
-                        print colored(('%-16s' % childname),'blue',attrs=['bold']),
+                        if node.isPassage() == True:
+                            print colored(('%-16s' % childname),'grey',attrs=['bold']),
+                        elif node.isPassage() == None:
+                            pass
+                        else:
+                            print colored(('%-16s' % childname),'blue',attrs=['bold']),
                     elif node.isFile() == True:
                         print ('%-16s' % childname),
                     elif node.isExc() == True:
@@ -173,6 +178,8 @@ class Session:
             try:
                 node = self.find(argv[1])
                 if not node.isDir():
+                    print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
+                elif node.isPassage == None:
                     print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
                 else:
                     if node.execute2 == False:
@@ -314,10 +321,10 @@ class Session:
             print colored((text),'white',attrs=['bold'])
     def use_builtin(self,argv):
         if len(argv) == 1:
-            print self.name, ": use: specify and object... sheesh."
+            print self.name, ": use: specify an object... sheesh."
         else:
             if argv[1] == '--help':
-                print "No help allowed. What word about challenge don't you understand? Theres only even one waord, so that's pretty sad."
+                print "No help allowed. What word about challenge don't you understand? Theres only even one word, so that's pretty sad."
             else:
                 find = False
                 for thing in self.own:
@@ -330,3 +337,20 @@ class Session:
                         find = True
                 if find == False:
                     print self.name, ": use: You don't even have an object called", argv[1], "! Get it togethor! You clearly can't use something you don't own!"
+    def decode_builtin(self,argv):
+        #below is a auto-decode code for testing purposes
+        if len(argv) == 1:
+            print self.name, ": decode: specify a keyword... sheesh."
+        elif argv[1] == '--help':
+            print "No help allowed. Super sorry... If you beleive that not receiving any help is somehow unfair, please lodge a complaint with SEE..."
+        elif argv[1] == '-all':
+            for child in self.pwd.children:
+                node = self.find(child)
+                if node.isPassage() == None:
+                    node.found = True
+        else:
+            for child in self.pwd.children:
+                node = self.find(child)
+                if node.isPassage() == None:
+                    if argv[1] == node.key:
+                        node.found = True
