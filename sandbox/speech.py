@@ -1,4 +1,10 @@
 import insult as ins
+from termcolor import cprint, colored
+import sys
+import time
+import tty
+import termios
+import random
 
 def isIn(text,meaning):
         #ignore words, like that is good, that is #really# good

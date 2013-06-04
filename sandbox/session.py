@@ -94,7 +94,8 @@ class Session:
             except KeyboardInterrupt:
                 print
             except EOFError:
-                print 'mash: EOF Error'
+                print ' '
+                print self.name, ': EOF Error'
     # command handlers go here
     def exit_builtin(self,argv):
         print 'exit'
@@ -115,7 +116,7 @@ class Session:
             try:
                 node = self.find(name)
                 if node.read == False:
-                    print self.name, ": ls: According to the challenge, you don't have permissions to do that here. You don't have read permissions on this node, which includes ls."
+                    print self.name, ": vw: According to the challenge, you don't have permissions to do that here. You don't have read permissions on this node, which includes ls."
                     return
                 if node.isDir():
                     dirs[name] = node
@@ -142,34 +143,42 @@ class Session:
             # Print dir contents in alphabetical order, where it gets colors
             for childname in sorted(dirs[name].children.iterkeys()):
                     node = dirs[name].children[childname]
-                    if node.isDir() == True:
-                        if node.isPassage() == True:
-                            print colored(('%-16s' % childname),'grey',attrs=['bold']),
-                        elif node.isPassage() == None:
-                            pass
-                        else:
-                            print colored(('%-16s' % childname),'blue',attrs=['bold']),
-                    elif node.isFile() == True:
-                        print ('%-16s' % childname),
-                    elif node.isExc() == True:
-                        if node.isGate() == True:
-                            if node.isHold() == True:
-                                print colored(('%-16s' % childname),'yellow',attrs=['bold']),
+                    if node.color() == None:
+                        if node.isDir() == True:
+                            if node.isPassage() == True:
+                                print colored(('%-16s' % childname),'grey',attrs=['bold']),
+                            elif node.isPassage() == None:
+                                pass
                             else:
-                                print colored(('%-16s' % childname),'magenta',attrs=['bold']),
-                        else:
-                            if node.isPerson() == True:
-                                print colored(('%-16s' % childname),'white',attrs=['bold']),
+                                print colored(('%-16s' % childname),'blue',attrs=['bold']),
+                        elif node.isFile() == True:
+                            print ('%-16s' % childname),
+                        elif node.isExc() == True:
+                            if node.isGate() == True:
+                                if node.isHold() == True:
+                                    print colored(('%-16s' % childname),'yellow',attrs=['bold']),
+                                else:
+                                    print colored(('%-16s' % childname),'magenta',attrs=['bold']),
                             else:
-                                print colored(('%-16s' % childname),'green',attrs=['bold']),
-                    elif node.isObj() == True:
-                        print colored(('%-16s' % childname),'cyan',attrs=['bold']),
+                                if node.isPerson() == True:
+                                    print colored(('%-16s' % childname),'white',attrs=['bold']),
+                                else:
+                                    print colored(('%-16s' % childname),'green',attrs=['bold']),
+                        elif node.isObj() == True:
+                            print colored(('%-16s' % childname),'cyan',attrs=['bold']),
+                        else:
+                            print colored(('%-16s' % childname+'--None'),'red',attrs=['bold']),
                     else:
-                        print colored(('%-16s' % childname+'--None'),'red',attrs=['bold']),
+                        try:
+                            print (node.color() % childname),
+                        except:
+                            print 'mash: vw: colored name error'
+                            raise KeyboardInterrupt
             print
 
     def whoami_builtin(self,argv):
         cprint('Seriously???', 'yellow', 'on_yellow', attrs=['bold','dark','underline'])
+        print 'cd-- like normal system cd  ls-- like normal system ls but with no -a/l argv modifiers and new color coding  cat-- shows text in read permission granted files  whoami-- comments on that question  pwd-- prints current directory, might be disabled for most of challenge  find-- lets you find stuff will definetely be disabled in challenge but useful sandbox command  man-- tells you about commands  exc-- executes an executable  take-- takes an object, which later may be used  nodes-- simplified ls for testing purposes, as it has no restrictions and has a -l operand  use-- lets you use an object if you own it  decode-- with a modifier pertaining to something in the current directory, able to reveal hidden things...'
 
     def cd_builtin(self,argv):
         #if there is no second argument go home
@@ -187,6 +196,8 @@ class Session:
                     if node.execute2 == False:
                         print self.name, ": cd: You do not have execute permissions to cd into this directory."
                     else:
+                        if node.isAutoExc():
+                            node.execute()
                         self.pwd = node
             except RuntimeError,e:
                 print '%s: %s: %s' % (self.name,argv[0],str(e))
@@ -298,14 +309,14 @@ class Session:
             else:
                 try:
                     node = self.find(argv[1])
+                    if node.isObj():
+                        self.own.append(node)
+                        node.taken = True
                     if node.execute2 == False:
                         print self.name, ': take: You do not have execute permissions on this node, which includes "take"'
                         return
                 except RuntimeError,e:
                     print '%s: %s: %s' % (self.name,argv[0],str(e))
-                if node.isObj():
-                    self.own.append(node)
-                    node.taken = True
     def nodes_builtin(self,argv):
         #tells you all nodes on self.pwd without any restrictions(for example permissions), color coding, or fancy touches. Useful for testing.
         for child in self.pwd.children:
@@ -356,5 +367,3 @@ class Session:
                 if node.isPassage() == None:
                     if argv[1] == node.key:
                         node.found = True
-    def commands_buitin(self,argv):
-        speech.say('cd-- like normal system cd  ls-- like normal system ls but with no -a/l argv modifiers and new color coding  cat-- shows text in read permission granted files  whoami-- comments on that question  pwd-- prints current directory, might be disabled for most of challenge  find-- lets you find stuff will definetely be disabled in challenge but useful sandbox command  man-- tells you about commands  exc-- executes an executable  take-- takes an object, which later may be used  nodes-- simplified ls for testing purposes, as it has no restrictions and has a -l operand  use-- lets you use an object if you own it  decode-- with a modifier pertaining to something in the current directory, able to reveal hidden things...')

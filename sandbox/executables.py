@@ -222,3 +222,23 @@ class bob(Person):
                                 self.say('sorry, but i cant do that, because im in root directory.')
                 else:
                         self.say('okay then. bye for now.')
+
+
+#IC challenge
+
+class ExecutePath(path):
+        def __init__(self):
+                path.__init__(self,'door','Blank, steel walled room. A sign reads: Well done! You have just mastered one basic action permitted in this system.')
+        def execute(self):
+                speech.say("Who are you! Whoever you are, your going to regret ever looking to get past this door! You are NOT getting in.",mood='angry')
+                time.sleep(0.5)
+                print '--Acess Granted--'
+                time.sleep(0.2)
+                speech.say("What?! No! Stupid program! You're not allowed in here! Go away! Wait, no! Come back! Face me!!!!",mood='angry')
+                time.sleep(0.2)
+                print 'Shutting down doorway program. Have a nice day.'
+                time.sleep(0.2)
+                speech.say("Stop!",mood='angry')
+                return True
+
+#SEE challenge

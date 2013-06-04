@@ -1,6 +1,8 @@
 #to do before challenge construct: clean up speech, make hidden dir class, and make permissions
 
 import session
+import speech
+from termcolor import colored, cprint
 
 class Node:
     def __init__(self,name,permissions):
@@ -48,6 +50,10 @@ class Node:
         return False
     def isPassage(self):
         return False
+    def isAutoExc(self):
+        return False
+    def color(self):
+        return None
         
 class File(Node):
     def __init__(self,name,contents=" ",permissions='r'):
@@ -95,6 +101,12 @@ class Directory(Node):
     def isDir(self):
         return True
 
+class AED(Directory):
+    def __init__(self,name,look,permissions='rx'):
+        Directory.__init__(self,name,look,permissions)
+    def isAutoExc(self):
+        return True
+
 class hiddenDir(Directory):
     def __init__(self,name,look,keyWord,permissions='rx'):
         Directory.__init__(self,name,look,permissions)
@@ -130,3 +142,43 @@ class key(obj):
                         self.used = True
                 else:
                         print 'key already used'
+
+#IC challenge
+
+class redDoor(AED):
+    def __init__(self):
+        AED.__init__(self,'RedDoor','A sign reads: Well done. Please advance as the recording instructs you. Caution: Danger of extremely painful injuries and/or death')
+        self.done = False
+    def execute(self):
+        if self.done == True:
+            return
+        speech.say("Well done. We will now talk about the execute function. It is used to execute programs and similar objects. For this test, type exc and then the name of the executable node. You will find this node, or you will fail to leave the room.")
+        self.done = True
+    def color(self):
+        return colored('RedDoor','red',attrs=['bold'])
+
+class blueDoor(AED):
+    def __init__(self):
+        AED.__init__(self,'BlueDoor','A sign reads: You are obviously annoyingly incapable of much anything. Please step through the green door for vaporization.')
+        self.done = False
+    def execute(self):
+        if self.done == True:
+            return
+        speech.say("Why are you doing that? ? ? ? You are absolutely useless! ! ! ! I tell you to go into the red door, and what do you do?? You go into the blue one! What is the whole point of telling you to do anything if you can't even do it! Anyway, now that your here, there is something kind of cool you might want to see. It's in the green door.")
+        self.done = True
+    def color(self):
+        return colored('BlueDoor','blue',attrs=['bold'])
+
+class greenDoor(AED):
+    def __init__(self):
+        AED.__init__(self,'GreenDoor','A sign reads: Why are you even reading this? Your about to be painfully vaporized and your busy reading road signs?  A second sign reads: Closed for maintenance')
+        self.done = False
+    def execute(self):
+        if self.done == True:
+            return
+        speech.say("Just step foward a bit... oh. out of service. never mind. You should probably go. By the way, you didn't by any chance know what those signs said, did you? Good. That's very good. Anyway, don't like, try to find out later or anything. There isn't actually anything in this room, so go back to the red door.")
+        self.done = True
+    def color(self):
+        return colored('GreenDoor','green',attrs=['bold'])
+
+#SEE challenge
