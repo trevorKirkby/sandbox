@@ -1,6 +1,9 @@
 import pickle
+import os
 
-def save():
-    pass
+def save(root):
+    filename = open('/home/pi/sandbox/.system.pkl','w+')
+    pickle.dump(root,filename)
 def load():
-    pass
+    filename = open('/home/pi/sandbox/.system.pkl','r')
+    return pickle.load(filename)

@@ -170,7 +170,7 @@ class chest(objHold):
         def execute(self):
                 if self.done==True:
                         print 'I thought i told you never to come back! get out!'
-                        raise SystemExit
+                        raise KeyboardInterrupt
                 print "You don't get entry. Sorry. Actually, sorry about this revision, i'm not sorry. Anyway, I don't have any good reason to let you get what's inside this chest."
                 time.sleep(5)
                 print 'well? leave!'
