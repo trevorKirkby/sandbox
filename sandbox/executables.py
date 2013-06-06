@@ -239,6 +239,22 @@ class ExecutePath(path):
                 print 'Shutting down doorway program. Have a nice day.'
                 time.sleep(0.2)
                 speech.say("Stop!",mood='angry')
+                print ' '
+                time.sleep(0.2)
+                speech.say('Well done. You have just entered a doorway. Now try another.')
+                return True
+
+class ExecutePath2(path):
+        def __init__(self):
+                path.__init__(self,'door','Blank, steel walled room. A sign reads: Well done! You have just mastered one basic action permitted in this system. Try it again with the next door.')
+        def execute(self):
+                speech.say("Hello. Why are you here? You can only get in if you answer the question. Wow... This is dull. Anyway, heres the question and all that.",'sad')
+                time.sleep(0.5)
+                answer = speech.ask("Wow what is the point of this question anyway... Oh well. What is a quasar? a) A rare and super-bright blue giant star b) c) d) e) f) g)"mood='sad')
+                time.sleep(0.2)
+                print 'Shutting down doorway program. Have a nice day.'
+                time.sleep(0.2)
+                speech.say("Stop!",mood='angry')
                 return True
 
 #SEE challenge
