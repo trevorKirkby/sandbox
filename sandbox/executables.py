@@ -250,9 +250,9 @@ class ExecutePath2(path):
         def execute(self):
                 speech.say("Hello. Why are you here? You can only get in if you answer the question. Wow... This is dull. Anyway, heres the question and all that.",'sad')
                 time.sleep(0.5)
-                answer = speech.ask("Wow what is the point of this question anyway... Oh well. What is a quasar? a) A rare and super-bright blue giant star b) c) d) e) f) g)"mood='sad')
+                answer = speech.ask("Wow what is the point of this question anyway... Oh well. What is a quasar? a) A rare and super-bright blue giant star b) The core of a tardis c) A red spectrum d) A species of indonesian rodent e) Not a, the, its a moon of jupiter f) 42 g) A very bright blue cosmic mass found near black holes h) A very bright red cosmic mass found near the center of dark matter clumps and therefore used to map dark matter clumping i) A giant red pulsar j) A brand of shoe k) A collapsing white dwarf l) The general name for a cosmic anomaly m) A bright star n) A burning comet o) A cirritulus zarker p) A roasted peice of fungus on a stick. Answer as a letter (no caps)",mood='sad')
                 time.sleep(0.2)
-                print 'Shutting down doorway program. Have a nice day.'
+                answer2 = speech.ask("Well done and all that, you are right. So, now. What is a chameleon hexbox? a) An executable 'box' bundle of hex language learning chamelion programs b) A chamelion program using the new hexbox library for escaping supposedly 'secure' sandbox programs c) A shython sandbox used to train chameleons d) A hex chameleon that teaches itself to 'box' your computer, or turn it into a useless box of molten silicon e) A hex chameleon with restrictions that keep it in it's box, a directory it may not leave, though it may navigate through children directories f) The name for the hex version of chameleon g) The chameleion sentinel you must later face",mood='sad')
                 time.sleep(0.2)
                 speech.say("Stop!",mood='angry')
                 return True

@@ -39,6 +39,8 @@ def createSyst():
 
     greenDoor = fs.greenDoor()
     blueDoor.add(greenDoor)
+    #
+    #
     print ' ' + ' ' + ' '
     print 'bash: error: tellnet_deamon: Greetings...'
     print ' ' + ' ' + ' '
@@ -130,7 +132,7 @@ if os.path.isfile('/home/pi/sandbox/.system.pkl'):
         print 'loading previous system...'
         root = sandbox.save.load()
 else:
-        print 'creating new system...'
+        print 'Traceback (Most recent call last): file <.bashrc>: you are doomed'
         root = createSyst()
 
 try:
