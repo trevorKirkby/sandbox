@@ -183,7 +183,7 @@ class greenDoor(AED):
 
 class yellowDoor(AED):
     def __init__(self):
-        AED.__init__(self,'yellowDoor','A sign reads: Prepare for part 1B of 7...')
+        AED.__init__(self,'YellowDoor','A sign reads: Prepare for part 1B of 7...')
         self.done = False
     def execute(self):
         if self.done == True:
