@@ -97,11 +97,12 @@ class Session:
                 print ' '
                 print self.name, ': EOF Error'
     # command handlers go here
-    def exit_builtin(self,argv):
-        print 'exit'
+    def leave_builtin(self,argv):
+        print 'leaving...'
         raise SystemExit
 
     def pwd_builtin(self,argv):
+        #tie to test mode
         print self.pwd.abspath()
 
     # Emulate the behavior of /bin/ls with no options
@@ -170,7 +171,7 @@ class Session:
                             print colored(('%-16s' % childname+'--None'),'red',attrs=['bold']),
                     else:
                         try:
-                            print (node.color() % childname),
+                            print node.color(),
                         except:
                             print 'mash: vw: colored name error'
                             raise KeyboardInterrupt
@@ -258,6 +259,7 @@ class Session:
 #sometime, you should meld look and cat, as they do about the same thing, just one for files and one for dirs.
 
     def find_builtin(self,argv):
+        #tie to test mode
         for path in argv[1:]:
             try:
                 self.find(path,debug=True)
@@ -318,7 +320,7 @@ class Session:
                 except RuntimeError,e:
                     print '%s: %s: %s' % (self.name,argv[0],str(e))
     def nodes_builtin(self,argv):
-        #tells you all nodes on self.pwd without any restrictions(for example permissions), color coding, or fancy touches. Useful for testing.
+        #tells you all nodes on self.pwd without any restrictions(for example permissions), color coding, or fancy touches. Useful for testing, link to test mode variable later
         for child in self.pwd.children:
             node = self.find(child)
             if len(argv) > 1:

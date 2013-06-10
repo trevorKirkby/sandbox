@@ -181,4 +181,17 @@ class greenDoor(AED):
     def color(self):
         return colored('GreenDoor','green',attrs=['bold'])
 
+class yellowDoor(AED):
+    def __init__(self):
+        AED.__init__(self,'yellowDoor','A sign reads: Prepare for part 1B of 7...')
+        self.done = False
+    def execute(self):
+        if self.done == True:
+            return
+        speech.say("Well done then. This is a nice door, isn't it? Anyway, prepare for part 1B of 7 in your introduction to the challenge. To enter it, just wait a second... In the meantime, the commands to take objects in your directory and use objects you have are take, and use. Simple. Standby...")
+        self.done = True
+        raise OSError
+    def color(self):
+        return colored('YellowDoor','yellow',attrs=['bold'])
+
 #SEE challenge

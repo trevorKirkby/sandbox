@@ -216,7 +216,7 @@ class bob(Person):
                 variableA = self.ask('i can also ask questions, easily. would you like me to move to directory ..? y/N')
                 if variableA == 'y':
                         if self.parent.parent != None:
-                                self.say('okay... hold on a sec.')
+                                self.say('okay... hold on a sec. By the way, two and nine.')
                                 self.move((self.parent).parent)
                         else:
                                 self.say('sorry, but i cant do that, because im in root directory.')
@@ -240,21 +240,135 @@ class ExecutePath(path):
                 time.sleep(0.2)
                 speech.say("Stop!",mood='angry')
                 print ' '
+                print 'Warning: shutting down this doorway artificial intelligence will result in short term memory corruption and successive deletion. Continue Y/n : Yes'
+                print ' '
                 time.sleep(0.2)
                 speech.say('Well done. You have just entered a doorway. Now try another.')
                 return True
 
 class ExecutePath2(path):
         def __init__(self):
-                path.__init__(self,'door','Blank, steel walled room. A sign reads: Well done! You have just mastered one basic action permitted in this system. Try it again with the next door.')
+                path.__init__(self,'door','Blank, steel walled room. A sign reads: Well done! You are clearly a genius. The challenge will seriously be way easier than this.')
+                self.visited = False
+                self.entered = False
         def execute(self):
-                speech.say("Hello. Why are you here? You can only get in if you answer the question. Wow... This is dull. Anyway, heres the question and all that.",'sad')
+                if self.visited == False:
+                        speech.say("Hello. Why are you here? You can only get in if you answer the question. Wow... This is dull. Anyway, heres the question and all that.",'sad')
+                else:
+                        speech.say("Oh its you again... Well, here is the question.",'sad')
+                if self.entered == True:
+                        speech.say("Why are you trying to gain entry again, anyway? Anyway, as I said, you still need to answer the questions.",'sad')
                 time.sleep(0.5)
-                answer = speech.ask("Wow what is the point of this question anyway... Oh well. What is a quasar? a) A rare and super-bright blue giant star b) The core of a tardis c) A red spectrum d) A species of indonesian rodent e) Not a, the, its a moon of jupiter f) 42 g) A very bright blue cosmic mass found near black holes h) A very bright red cosmic mass found near the center of dark matter clumps and therefore used to map dark matter clumping i) A giant red pulsar j) A brand of shoe k) A collapsing white dwarf l) The general name for a cosmic anomaly m) A bright star n) A burning comet o) A cirritulus zarker p) A roasted peice of fungus on a stick. Answer as a letter (no caps)",mood='sad')
+                answer = speech.ask("Wow what is the point of this question anyway... Oh well. What is a quasar? a) A rare and super-bright blue giant star b) The core of a tardis c) A red spectrum d) A species of indonesian rodent e) Not a, the, its a moon of jupiter f) 42 g) A very bright blue cosmic mass found near black holes h) A very bright red cosmic mass found near the center of dark matter clumps and therefore used to map dark matter clumping i) A giant red pulsar j) A brand of shoe k) A collapsing white dwarf l) The general name for a cosmic anomaly m) A bright star n) A burning comet o) A cirritulus zarker p) A roasted peice of fungus on a stick. q) An occurence similar to a singularity r) A blob of goose fat. Answer as a letter (no caps)",mood='sad')
                 time.sleep(0.2)
-                answer2 = speech.ask("Well done and all that, you are right. So, now. What is a chameleon hexbox? a) An executable 'box' bundle of hex language learning chamelion programs b) A chamelion program using the new hexbox library for escaping supposedly 'secure' sandbox programs c) A shython sandbox used to train chameleons d) A hex chameleon that teaches itself to 'box' your computer, or turn it into a useless box of molten silicon e) A hex chameleon with restrictions that keep it in it's box, a directory it may not leave, though it may navigate through children directories f) The name for the hex version of chameleon g) The chameleion sentinel you must later face",mood='sad')
+                answer2 = speech.ask("Well done and all that, you are right. So, now. What is a chameleon hexbox? a) An executable 'box' bundle of hex language learning chamelion programs b) A chamelion program using the new hexbox library for escaping supposedly 'secure' sandbox programs c) A shython sandbox used to train chameleons safely d) A hex chameleon that teaches itself to 'box' your computer, or turn it into a useless box of molten silicon e) A hex chameleon with restrictions that keep it in it's box, a directory it may not leave, though it may navigate through children directories f) The name for the hex version of chameleon g) The usual but not current confinement of the hex chameleon sentinel that you must later face",mood='sad')
                 time.sleep(0.2)
-                speech.say("Stop!",mood='angry')
-                return True
+                if answer == 'g' and answer2 == 'c':
+                        if self.entered == True:
+                                speech.say("you get entry, again. How monotonous...",'sad')
+                        elif self.visited == True:
+                                speech.say("Well done and all that. That was probably the most interesting thing that happened in a while, and no offense but your not even that interesting. Took you a few tries, though. Bye then.",mood='sad')
+                                speech.say("Congratulations. You have just learned about doorways, though you have failed to anwer the question correctly from your first try. Your next training feature will pertain to hidden directories. Read about them by using the command cat to veiw the file. Good luck.")
+                        else:
+                                speech.say("Well done and all that. That was probably the most interesting thing that happened in a while, and no offense but your not even that interesting. Bye then.",mood='sad')
+                                speech.say("Congratulations. You have just learned about doorways. Your next training feature will pertain to hidden directories. Read about them by using the command cat to veiw the file. Good luck.")
+                        return True
+                else:
+                        speech.say("Well done. I guess you will be leaving now. Opening doorway... 5... 4... 3... 2... 1... Actually I lied. You failed. You can't get in. Really though, I can't see why you would want to.",'sad')
+                        return None
+
+class prog1(program):
+        def __init__(self):
+                program.__init__(self,'program1')
+                #here is also a good place to make remembered variables, or pickled variables, stored in self.variable
+                self.thing = False
+        def execute(self):
+                if self.thing == False:
+                        speech.ask("Hello, how are you? : ")
+                        speech.say("eh? Whatever. My task of freindly greetings is complete. By now.")
+                        self.thing = True
+                else:
+                        speech.say("Why are you talking to me again? I don't have to greet you this time, and I have better things to do right now. Bye!",'angry')
+
+class prog2(program):
+        def __init__(self):
+                program.__init__(self,'program5')
+                #here is also a good place to make remembered variables, or pickled variables, stored in self.variable
+                self.thing = False
+        def execute(self):
+                if self.thing == False:
+                        speech.say("I don't know where I am...",'scared')
+                        self.thing = True
+                else:
+                        speech.say("I obviously still don't know where I am so why are you still talking to me!!!",'angry')
+
+class prog3(program):
+        def __init__(self):
+                program.__init__(self,'program11')
+                #here is also a good place to make remembered variables, or pickled variables, stored in self.variable
+                self.thing = False
+        def execute(self):
+                if self.thing == False:
+                        speech.say("Snap snap snap I'm a lizard")
+                        self.thing = True
+                else:
+                        speech.say("Still a lizard.")
+
+class prog4(program):
+        def __init__(self):
+                program.__init__(self,'program52andAhalf')
+                #here is also a good place to make remembered variables, or pickled variables, stored in self.variable
+                self.thing = False
+        def execute(self):
+                if self.thing == False:
+                        speech.say("beutiful day isn't it? actually according to my data banks it is likely raining or at least cloudy as you read this, but rain is nice. By the way, you should really listen to all of us even after you find what you need.",'happy')
+                        self.thing = True
+                else:
+                        speech.say("AAAAAAHH!!!!!!!!!!!!!!!!!! HELP!!!!!!!!!!!!!!!!",'scared')
+
+class prog5(program):
+        def __init__(self):
+                program.__init__(self,'program72')
+                #here is also a good place to make remembered variables, or pickled variables, stored in self.variable
+                self.thing = False
+        def execute(self):
+                if self.thing == False:
+                        speech.ask("Do you want help? : ")
+                        speech.say("Is that english? Oh whatever. Anyway, here is your help. Beware the sparrows, count the shadows, don't trust the sentinel.")
+                        self.thing = True
+                else:
+                        speech.say("TIME IS THE ANSWER",'happy')
+
+class prog6(program):
+        def __init__(self):
+                program.__init__(self,'program37')
+                #here is also a good place to make remembered variables, or pickled variables, stored in self.variable
+                self.thing = False
+        def execute(self):
+                if self.thing == False:
+                        for thing in range(10):
+                                speech.say("Blub blub blub blub blub I'm a fish. Blub blub blub blub blub I'm a fish. Blub blub blub blub blub I'm a fish. Blub blub blub blub blub I'm a fish. Blub blub blub blub blub I'm a fish. Blub blub blub blub blub I'm a fish. Blub blub blub blub blub I'm a fish. Blub blub blub blub blub I'm a fish. Blub blub blub blub blub I'm a fish!",'happy')
+                        self.thing = True
+                else:
+                        speech.say("BLUB!!!!! FISH!!!!!!!!!!!! TALK TO THIRTY SIX!",'angry')
+
+class prog7(program):
+        def __init__(self):
+                program.__init__(self,'program36')
+                #here is also a good place to make remembered variables, or pickled variables, stored in self.variable
+                self.thing = False
+        def execute(self):
+                if self.thing == False:
+                        speech.ask("Tell me. What is the logic of choosing program thirty six? : ")
+                        speech.say("Oh, I see. You can't speak... You don't even know how to look, do you? Well, visit again sometime, okay?")
+                        self.thing = True
+                else:
+                        speech.say("Hello agian! Here is a lesson on looking! Type look!",'happy')
+
+class win(program):
+        def __init__(self):
+                program.__init__(self,'IC:level2outOf7')
+        def execute(self):
+                speech.say("Actually, you are done with the test. Surprise! Anyway, here come the results .......... ........... ........... .............................. ................. ................ ......................................................... ............................. ........... ...... ... .... Oh! You passed with flying colors! Well, good job. Actually, again, I lied. It's good practice for the challenge. You failed with colors that went up into the air, caught fire, had their wings fall off, and then plummetted down in a spectacular explosion and sank through the earth's crust never to be seen again. But on the bright side, you still get to do the challenge! Safety regulations are pretty loose! Anyway, You also get use back to your computer for now. You'll be contacted by the challenge administration office when the last contestant in the challenge dies and the system becomes vacant. Expect an email from TrevorKirkby123... So to leave, it should be obvious. You know what to type to leave by now I trust? Good, then give the leave command.")
 
 #SEE challenge
