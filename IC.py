@@ -75,7 +75,7 @@ def createSyst():
     greenDoor = fs.greenDoor()
     blueDoor.add(greenDoor)
     #
-    if TEST == False:
+    if True:
         print '\n' + '\n' + '\n'
         print 'bash: error: tellnet_deamon: Greetings...'
         print ' '
@@ -199,8 +199,6 @@ else:
 try:
         test = se.Session(root,'capsule',(root.children['Paths']).children['PreparationCapsuleHomeSectionA'])
         test.shell('-:#`/>: ')
-except OSError:
-        sbox.run()
 except SystemExit:
         if TEST == False:
             sandbox.save.save(root)
@@ -210,4 +208,6 @@ except SystemExit:
                 print 'fine. just delete the file .ic, cuz i wont do it for you.'
             else:
                 sandbox.save.save(root)
-#weakness=^Z, aliases for fg!!!! hahah
+except OSError:
+        sbox.run()
+#weakness=^Z, aliases for fg!!!!

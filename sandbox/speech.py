@@ -37,7 +37,7 @@ def isIn(text,meaning):
                         elif marker == True:
                                 marker = False
                                 foundIndex = 0
-                print index, foundIndex
+                #print index, foundIndex
         return found
 
 def say(text,mood='norm',enter=True):

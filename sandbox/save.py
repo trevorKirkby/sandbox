@@ -7,3 +7,10 @@ def save(root):
 def load():
     filename = open('/home/pi/sandbox/.system.pkl','r')
     return pickle.load(filename)
+
+def save2(home):
+    filename = open('/home/pi/sandbox/.systHome.pkl','w+')
+    pickle.dump(home,filename)
+def load2():
+    filename = open('/home/pi/sandbox/.systHome.pkl','r')
+    return pickle.load(filename)

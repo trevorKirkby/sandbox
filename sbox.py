@@ -22,7 +22,7 @@ def createSyst():
         trevor = users.mkdir('trevor','welcome to your home directory. This is a sandbox simulation and all that.')
         desktop = trevor.mkdir('desktop','this is a desktop folder. Theres not a lot in it is there?')
         passage2 = fs.hiddenDir('secretPassageTwo','A sign reads: Wow! You have totally shattered all of our expectations. Actually, you actually might have. Chances are we have very little faith in you, and probably for good reason.','5279')
-        thingamobob = ex.win()
+        thingamabob = ex.win()
         passage2.add(thingamabob)
         desktop.add(passage2)
         #talker = gp.program()
@@ -48,22 +48,25 @@ def createSyst():
         woodenChest.add(dog)
         keyObject = fs.key()
         woodenChest.add(keyObject)
-        return rootdir
+        return [rootdir,trevor]
 
 def run():
         if os.path.isfile('/home/pi/sandbox/.system.pkl'):
                 print 'loading previous system...'
-                rootdir = sandbox.save.load()
+                thing = sandbox.save.load()
+                thing2 = sandbox.save.load2()
+                rootdir = (thing, thing2)
         else:
-                print 'creating new system...'
+                print 'building system...'
                 rootdir = createSyst()
 
         try:
-                s = sandbox.session.Session(rootdir,'mash',(rootdir.children['users']).children['trevor'])
+                s = sandbox.session.Session(rootdir[0],'mash',rootdir[1])
                 s.shell('/$: ')
         except SystemExit:
-                if TEST == True:
-                        sandbox.save.save(rootdir)
+                if TEST == False:
+                        sandbox.save.save(rootdir[0])
+                        sandbox.save.save2(rootdir[1])
                 else:
                         print 'Resetting...'
                         os.remove('/home/pi/sandbox/.system.pkl')

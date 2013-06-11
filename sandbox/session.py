@@ -245,12 +245,12 @@ class Session:
                         print self.name, ': cat:', argv[1], ': You are not granted read permissions on this node.'
                     if node.isFile():
                         print node.contents
+                    if node.isDir():
+                        print self.name, ": cat:", argv[1], ": Is a directory"
+                    if node.isExc():
+                        print self.name, ": cat:", argv[1], ": Is an executable"
                 except RuntimeError,e:
                     print '%s: %s: %s' % (self.name,argv[0],str(e))
-                if node.isDir():
-                    print self.name, ": cat:", argv[1], ": Is a directory"
-                if node.isExc():
-                    print self.name, ": cat:", argv[1], ": Is an executable"
 
     def look_builtin(self,argv):
         if self.pwd.read == False:
