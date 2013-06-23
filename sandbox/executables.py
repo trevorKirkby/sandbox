@@ -372,3 +372,171 @@ class win(program):
                 speech.say("Actually, you are done with the test. Surprise! Anyway, here come the results .......... ........... ........... .............................. ................. ................ ......................................................... ............................. ........... ...... ... .... Oh! You passed with flying colors! Well, good job. Actually, again, I lied. It's good practice for the challenge. You failed with colors that went up into the air, caught fire, had their wings fall off, and then plummetted down in a spectacular explosion and sank through the earth's crust never to be seen again. But on the bright side, you still get to do the challenge! Safety regulations are pretty loose! Anyway, You also get use back to your computer for now. You'll be contacted by the challenge administration office when the last contestant in the challenge dies and the system becomes vacant. Expect an email from TrevorKirkby123... So to leave, it should be obvious. You know what to type to leave by now I trust? Good, then give the leave command.")
 
 #SEE challenge
+#speech and autoprint-- alternating colors, alternating caps, etc.
+
+#PATH SPIRE:
+
+class BridgeToTerrace(path):
+        def __init__(self):
+                path.__init__(self,'SketchBridge','Well done. You have safely reached an intermediary pillar. More bridge awaits.')
+                self.visited = False
+        def execute(self):
+                if self.visited == False:
+                        self.visited = True
+                        speech.say("You are granted access to this door. Have a nice day. I, unlike other doors, do not have to ask a question. For some reason people think I will wear someone who wants to enter down just by talking a lot. That's obviously rediculous. I am not talkative at all you know? I am very very un-talkative. Anyway, how are things? What's the weather like anyway? Have you seen the steel bird yet? Maybe even the silver one? Hey, what's that! Huh, a bird. Why is it blue? Why not, like, green? Green is a good color. I mean, if you ask someone to pick a color, why is it always, yknow, blue? Anyway, how many--What's that? Oh, that's you. Sorry, I forgot you were here. Anyway, this is a big pillar of rock, isn't it? Do you even have a map? Are you even any good at this challenge? I bet your not. Anyway, what color would you say this spire is? Blue? I think it's green. Is it raining? I really don'y know. No eyes and all, being a program. So what's up with you now? How about now? Are you a fish? Lizards don't go snap! Did you know that a hippo sweats pink? What was that sound? I wonder if it was a hippo. Have you met the hippo yet? Whoops, I meant sentinel. Anyway, if your a half decent challenger, you might consider checking out the sparrow incidents. Have you met charadrius yet? Did you know that oranges are orange? Howabout programs? Aren't they cool? And what is a chamelion hexbox? I bet you know now... What is that? Huh. Anyway, blegh. Rodents, and stuff. Blob of goose fat. Quazaar. Silver feather and lethe water. Indescrimenate pine needles. Do you get it now? Yes. You do. Does that mean I should be quiet? Well? I guess not. Would you like some helpful guide info on the challenge? If your still listening I'll give you some advice. 1.Blub blub blub im a fish 2.Snap snap snap count the shadows, and remember the end to solve SEE. And finally, the real advice, three, you shouldn't trust AI's. For example, I just gave you some useless advice and used up some of your attention to boot. So there. HAH!!! You are still trapped... BECAUSE I WILL KEEP ON GOING. On second thought, this is dull. I'm going now.")
+                        return self.barrier()
+                else:
+                        speech.say("Welcome back. Still granted access in here. I don't know or care how well you can navigate, but you probably already know there is some tricky navigation ahead. Anyway, I will despense with the long amount of talking this time. You may enter.")
+                        return self.barrier()
+        def barrier(self):
+                #def-ize the below stuff to make pseudo sbox things in any gateway...
+                while True:
+                        try:
+                                BSprompt = colored('PathSpire','green',attrs=['bold','dark','underline']) + ' ' + colored('SketchBridge','yellow',attrs=['bold']) + '/$: '
+                                prompt2 = raw_input(BSprompt)
+                                if prompt2 == 'ls':
+                                        print colored('pathA','blue',attrs=['bold']), colored('pathB','blue',attrs=['bold']), colored('progA','green',attrs=['bold'])
+                                elif prompt2 == 'exc progA':
+                                        dog = speech.ask('Hello, what do you need?','sad')
+                                        if dog == '13':
+                                                speech.say('Oh. Right then... You may enter, of coarse.')
+                                                return True
+                                        else:
+                                                speech.say("That's all very interesting, but there's a problem. Apparently you are supposed to move to SEE/PathSpire, or home dir... Something is pulling you there right now.")
+                                                return None
+                                elif prompt2 == 'look':
+                                        print 'A weak looking rope bridge with a fork in the bridge and a large heavy terminal perched in between... Try not to fall and all that, as it would make for a dull ending to your challenge compared to some of the other ways...'
+                                elif prompt2[0] == 'c' and prompt2[1] == 'd':
+                                        while True:
+                                                try:
+                                                        BSprompt = colored('PathSpire','green',attrs=['bold','dark','underline']) + ' ' + colored('path','yellow',attrs=['bold']) + '/$: '
+                                                        prompt2 = raw_input(BSprompt)
+                                                        if prompt2 == 'ls':
+                                                                cprint('path','blue',attrs=['bold'])
+                                                        elif prompt2 == 'look':
+                                                                print 'A long paved road with the occasional flash of silver visible in the cloudy distance... A large fast food chain sign hangs from a cord dangling through the fog. Dont ask me why, I dont know. It is even farther away then the silver flashes...'
+                                                        elif prompt2 == 'cd path':
+                                                                pass
+                                                        elif prompt2 == 'cd ..':
+                                                                return None
+                                                        elif prompt2[0] == 'c' and prompt2[1] == 'd':
+                                                                print prompt2, ': If you typed something that is not a viable option, fie on you. Otherwise, we are sorry to inform you that it is possible some of your functions are being jammed by someone. We appologize for the inconveneince.'
+                                                        else:
+                                                                print prompt2, ': We are sorry for the inconveneince but some commands are currently down. If what you typed wasnt actually a command, we are not sorry as that means this message was broadcasted due to your failure. They will be back up soon, but we beleive something is jamming some of your commands.'
+                                                except KeyboardInterrupt:
+                                                        print '^C'
+                                                except EOFError:
+                                                        print ' ' + 'EOF Error'
+                                                except IndexError:
+                                                        pass
+                                else:
+                                        print prompt2, ': We are sorry for the inconveneince but some commands are currently down. If what you typed wasnt actually a command, we are not sorry as that means this message was broadcasted due to your failure. They will be back up soon, but we beleive something is jamming some of your commands.'
+                        except KeyboardInterrupt:
+                                print '^C'
+                        except EOFError:
+                                print ' ' + 'EOF Error'
+                        except IndexError:
+                                pass
+
+class QuestionGateSteelbirdNest(path):
+        def __init__(self):
+                path.__init__(self,'SmallWoodenGate','The platform has several potted plants growing, and a small pillar of stone covered in claw shaped notches. The switchback ramp leads onwards...')
+                self.visited = False
+                self.friendly = float(0)
+        def execute(self):
+                if self.visited == False:
+                        self.visited = True
+                        speech.say("Hello. Are you the new challenge contestant then? Well, whenever you cross this door, you must answer a question. Later, the question may change, but for now, it is the following.")
+                        answer = speech.ask("What does the cprint function do? a) It is the function built by the challenge creator to print colored, word by word, et cetera in this cool way b) It is a function of the termios module c) It is a function of the termcolor module d) It is an intermediary definition used by the chalenge builder to print a string word by word, regardless of color e) It is a feature of the textwrap module used to make sure words do not get chopped in half on the new line f) It is a def made by the builder used to set and unset the tty setraw to prevent keyboard interference while a program talks g) It is used to chamelion print colored text in a way that chamelions talk h) It is an import module for all of the above functions created by the challenge builder. h) You don't care and you think this question is stupid")
+                        if answer == 'c':
+                                speech.say("Congratulations. You even guessed that on your first try. I'm impressed. You may enter, of coarse. If your ever stumpted on some other question I might even be able to help you.")
+                                self.friendly += 3
+                                return True
+                        elif answer == 'h':
+                                speech.say("Well if you don't care then get lost! Your going back down these stairs now. And this question is perfectly intelligent, it's just you who is stupid. bye. I hope you lose your challenge.",'angry')
+                                self.friendly -= 3
+                                return False
+                        elif answer == 'a' or answer == 'b' or answer == 'd' or answer == 'e' or answer == 'f' or answer == 'g':
+                                speech.say('Your answer is incorrect. You may not enter at this moment.')
+                                return None
+                        else:
+                                speech.say('That is not a viable answer. Therefore, to me, it is gibberish. You do not have entry. Sorry.')
+                                return None
+                else:
+                        if self.friendly > 2:
+                                speech.say("Hey again! How are you? For now you gotta answer the question again but let me know if you ever need any help.")
+                                answer = speech.ask("What does the cprint function do? a) It is the function built by the challenge creator to print colored, word by word, et cetera in this cool way b) It is a function of the termios module c) It is a function of the termcolor module d) It is an intermediary definition used by the chalenge builder to print a string word by word, regardless of color e) It is a feature of the textwrap module used to make sure words do not get chopped in half on the new line f) It is a def made by the builder used to set and unset the tty setraw to prevent keyboard interference while a program talks g) It is used to chamelion print colored text in a way that chamelions talk h) It is an import module for all of the above functions created by the challenge builder. h) You don't care and you think this question is stupid")
+                                if answer == 'c':
+                                        speech.say("Congratulations. You even guessed that on your first try. I'm impressed. You may enter, of coarse. If your ever stumpted on some other question I might even be able to help you.")
+                                        self.friendly += 3
+                                        return True
+                                elif answer == 'h':
+                                        speech.say("Why are you being annoying like that! Go back down the stairs.",'angry')
+                                        self.friendly -= 3
+                                        return False
+                                elif answer == 'a' or answer == 'b' or answer == 'd' or answer == 'e' or answer == 'f' or answer == 'g':
+                                        speech.say('Sorry but you got it wrong this time.')
+                                        return None
+                                else:
+                                        speech.say("I'm afraid that is not a viable answer. Try again later I guess.")
+                                        return None
+                        elif self.friendly < -2:
+                                speech.say("Oh, it's you. You may have been rude, but since I'm nice you can still enter if you answer the question.",'angry')
+                                answer = speech.ask("What does the cprint function do? a) It is the function built by the challenge creator to print colored, word by word, et cetera in this cool way b) It is a function of the termios module c) It is a function of the termcolor module d) It is an intermediary definition used by the chalenge builder to print a string word by word, regardless of color e) It is a feature of the textwrap module used to make sure words do not get chopped in half on the new line f) It is a def made by the builder used to set and unset the tty setraw to prevent keyboard interference while a program talks g) It is used to chamelion print colored text in a way that chamelions talk h) It is an import module for all of the above functions created by the challenge builder. h) You don't care and you think this question is stupid",'angry')
+                                if answer == 'c':
+                                        speech.say("Congratulations. You guessed it. Operative word there being guessed, as you obviously didn't actually know. You are admitted... This time.",'angry')
+                                        return True
+                                elif answer == 'h':
+                                        speech.say("Are you being rude to me again???? Not cool! You are soooo out of here!",'angry')
+                                        self.friendly -= 4
+                                        return False
+                                elif answer == 'a' or answer == 'b' or answer == 'd' or answer == 'e' or answer == 'f' or answer == 'g':
+                                        speech.say('Your answer is incorrect, so there. You may not enter at this moment. Ha ha ha.')
+                                        return None
+                                else:
+                                        speech.say("That isn't even a proper answer. Therefore it is wrong. Ha ha ha.")
+                                        return None
+                        else:
+                                speech.say('Welcome back. You will still need to answer the question, which may or may not change when you get further into the challenge.')
+                                answer = speech.ask("What does the cprint function do? a) It is the function built by the challenge creator to print colored, word by word, et cetera in this cool way b) It is a function of the termios module c) It is a function of the termcolor module d) It is an intermediary definition used by the chalenge builder to print a string word by word, regardless of color e) It is a feature of the textwrap module used to make sure words do not get chopped in half on the new line f) It is a def made by the builder used to set and unset the tty setraw to prevent keyboard interference while a program talks g) It is used to chamelion print colored text in a way that chamelions talk h) It is an import module for all of the above functions created by the challenge builder. h) You don't care and you think this question is stupid")
+                                if answer == 'c':
+                                        speech.say("Congratulations. You guessed it. Not on your first try, but you'll do for the challenge perhaps. You may enter.")
+                                        self.friendly += 0.5
+                                        return True
+                                elif answer == 'h':
+                                        speech.say("Well if you don't care then get lost! Your going back down these stairs now. And this question is perfectly intelligent, it's just you who is stupid. Stop coming back here and leave me alone. bye. I hope you lose your challenge.",'angry')
+                                        self.friendly -= 2
+                                        return False
+                                elif answer == 'a' or answer == 'b' or answer == 'd' or answer == 'e' or answer == 'f' or answer == 'g':
+                                        speech.say('Your answer is incorrect. You may not enter at this moment.')
+                                        return None
+                                else:
+                                        speech.say('That is not a viable answer. Therefore, to me, it is gibberish. You do not have entry. Sorry.')
+                                        return None
+
+class silvergate(path):
+        def __init__(self):
+                path.__init__(self,'SilverGate','You are inside the silver gate. That does not hold any specific significance, as you undoubtedly knew that unless you are really clueless, but whatever.')
+        def execute(self):
+                speech.say("Hello. The way fowards is both simple and complex, as you may already know.",'excited')
+                doggy = speech.ask('Enter_The_Passkey',"excited")
+                if doggy == "191030243":
+                        return True
+                else:
+                        speech.say("You may not enter")
+                        return None
+        def color(self):
+                return colored('SilverGate','white',attrs=['bold','underline'])
+
+class chest2(objHold):
+        def __init__(self):
+                self.done=False
+                objHold.__init__(self,'chest','A label reads: S.E.E: QUALITY FURNITURE GOODS')
+                self.children = { }
+        def execute(self):
+                if self.done==True:
+                        speech.say("ACESS NOT GRANTED, YOU HAVE ALREADY COLLECTED YOUR STARTER'S PACKAGE")
+                        raise KeyboardInterrupt
+                self.done = True
+                speech.say("You may access the contents of this chest, beginner contestant. Good luck on the challenge, you will really, really need it...")
+                return True

@@ -5,6 +5,7 @@ import time
 import tty
 import termios
 import random
+import textwrap
 
 def isIn(text,meaning):
         #ignore words, like that is good, that is #really# good
@@ -41,6 +42,7 @@ def isIn(text,meaning):
         return found
 
 def say(text,mood='norm',enter=True):
+                text = textwrap.fill(text,75)
                 if mood == 'norm':
                         text = colored(text,'yellow',attrs=['bold'])
                 if mood == 'angry':
@@ -59,7 +61,14 @@ def say(text,mood='norm',enter=True):
                 for word in text:
 		        randthing = random.random()
 		        randVariable = float(randthing/7)
-		        sys.stdout.write(word)
+                        if word == '\n':
+                                termios.tcsetattr(fd, termios.TCSADRAIN, oldSet)
+                                print '\n',
+                                fd = sys.stdin.fileno()
+                                oldSet = termios.tcgetattr(fd)
+                                tty.setraw(sys.stdin)
+                        else:
+		                sys.stdout.write(word)
 		        sys.stdout.flush()
 		        time.sleep(randVariable)
                 termios.tcsetattr(fd, termios.TCSADRAIN, oldSet)

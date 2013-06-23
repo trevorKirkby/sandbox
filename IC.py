@@ -121,7 +121,7 @@ def createSyst():
             pass
         print ' '
         for number in range(700):
-            variable = random.choice(range(20))
+            variable = random.choice(range(21))
             if variable == 0:
                 print 'network config--     [', colored('System_Error','red',attrs=['bold']), ']                                             ',
             if variable == 1:
@@ -168,6 +168,8 @@ def createSyst():
                 print 'rivers; data, night, styx, lethe! Great Spire! Abyss! Galartheor!'
             if variable == 19:
                 print "I don't know where I am!"
+            if variable == 20:
+                print "Dead!!! All dead!! The Lions! Slaughtered!"
         print '\n'
         sp.say("Hello. If you are any bit more perceptive than you probably are or than the last bunch was, you may have noticed that the system has been hacked.")
         try:

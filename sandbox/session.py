@@ -13,7 +13,8 @@ import speech
 testMode = False
 
 class Session:
-    def __init__(self,fs,name,home):
+    def __init__(self,fs,name,home,mini=False):
+        self.mini = mini
         self.fs = fs
         self.name = name
         self.home = home
@@ -106,6 +107,7 @@ class Session:
         print self.pwd.abspath()
 
     # Emulate the behavior of /bin/ls with no options
+    # add restrictions on ls dirname as opposed to ls . regainable via an in game easter egg thing...
     def ls_builtin(self,argv):
         # Default argument is '.'
         if len(argv) == 1:
@@ -292,6 +294,8 @@ class Session:
                                     self.pwd = self.home
                                 if passing == None:
                                     pass
+                                if self.mini == True and passing == 'end':
+                                    raise SystemExit
                                 realProg = True
                         else:
                             realProg = None

@@ -96,6 +96,12 @@ class Directory(Node):
         self.children = newChildren
         return node
     # Makes and returns an empty subdirectory
+    #below are some functions to create 1 way and 2 way soft links, which will be nescessary for the system. This also means you can have a soft link to a non-directory if it is one way, allowing an object to apear but not actually dwell in an area, for example a program. This would technically mean that the object would be in two places, though it would only be aware of it's location in one.
+    def addlink(node):
+        self.children[node.name] = node
+    def add2wayLink():
+        self.children[node.name] = node
+        node.children[self.name] = self
     def mkdir(self,name,look,permissions='rx'):
         return self.add(Directory(name,look,permissions))
     def isDir(self):
@@ -195,3 +201,67 @@ class yellowDoor(AED):
         return colored('YellowDoor','yellow',attrs=['bold'])
 
 #SEE challenge
+
+class StarterTerrace(AED):
+    def __init__(self):
+        AED.__init__(self,"PathLedge",'Another platform of the stairway. Stairway continues.')
+        self.done = False
+    def execute(self):
+        if self.done == True:
+            return
+        speech.say("Hello. This is the challenge initiation and new contestant package distribution program. As this suggests, you will now receive your new contestant package. You will find the new possessions in the chest.")
+        self.done = True
+
+class Notebook(obj):
+        def __init__(self):
+            obj.__init__(self,'notebook','A fallen plastic casing of a notebook...')
+            self.taken = False
+            self.contents = []
+            self.total = []
+        def use(self):
+            while True:
+                indexZ=0
+                for line in self.contents:
+                    indexZ+=1
+                    print indexZ,'. ',line
+                variable = raw_input(">/: ")
+                if variable == '\n':
+                    pass
+                elif variable == 'del':
+                    self.contents3 = []
+                    indexer = 0
+                    for line in self.contents:
+                        indexer = indexer + 1
+                        if indexer == len(self.contents):
+                            pass
+                        else:
+                            self.contents3 += line
+                    self.contents = self.contents3
+                elif variable == 'edit':
+                    self.contents2 = []
+                    number = raw_input("pick a line to edit: ")
+                    indexer2 = 0
+                    for line in self.contents:
+                        indexer2 = indexer + 1
+                        if indexer2 == number:
+                            lineThing = raw_input("enter a replacement: ")
+                            self.contents2.append(lineThing)
+                        else:
+                            self.contents2.append(line)
+                    self.contents = self.contents2
+                elif variable == 'save':
+                    self.contents.append(self.total)
+                    self.contents = []
+                elif variable == 'load':
+                    index = 0
+                    for item in self.total:
+                        index += 1
+                        print index, '. ', item[0]
+                    thing = raw_input('Choose a note to edit(type a number): ')
+                    index = 0
+                    for item in self.total:
+                        index += 1
+                        if index == thing:
+                            self.contents = item
+                        else:
+                            self.contents.append(variable)
