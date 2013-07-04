@@ -170,7 +170,7 @@ class blueDoor(AED):
     def execute(self):
         if self.done == True:
             return
-        speech.say("Why are you doing that? ? ? ? You are absolutely useless! ! ! ! I tell you to go into the red door, and what do you do?? You go into the blue one! What is the whole point of telling you to do anything if you can't even do it! Anyway, now that your here, there is something kind of cool you might want to see. It's in the green door.")
+        speech.say("You are seriously going in the danged blue door again?? Your useless! I tell you to do something, and what do you do? You turn around and don't do it! What is the point telling you do do something if you can't do it? No matter though. I know what we can do. There's something you might want to see in the green room. Jyst, yknow, walk in, look around. You'll see.")
         self.done = True
     def color(self):
         return colored('BlueDoor','blue',attrs=['bold'])

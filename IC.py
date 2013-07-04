@@ -17,6 +17,26 @@ import time
 
 TEST = False
 
+try:
+        time.sleep(15)
+except:
+        try:
+                time.sleep(15)
+        except:
+                try:
+                        time.sleep(15)
+                except:
+                        try:
+                                time.sleep(15)
+                        except:
+                                try:
+                                        time.sleep(15)
+                                except:
+                                        try:
+                                                time.sleep(15)
+                                        except:
+                                                print "Well. You are persistant, aren't you."
+
 def createSyst():
     root = fs.Filesystem('This is the root directory of your challenge introduction capsule.')
     
@@ -76,117 +96,43 @@ def createSyst():
     blueDoor.add(greenDoor)
     #
     if True:
-        print '\n' + '\n' + '\n'
-        print 'bash: error: tellnet_deamon: Greetings...'
-        print ' '
-        print ' '
-        print ' '
+        print 'initialize: systemerror--   [', colored('fatal','red',attrs=['bold']), ']'
         try:
-            time.sleep(2)
-        except:
-            pass
-        print 'system restart...'
-        print '\n'
+                time.sleep(10)
+        except KeyboardInterrupt:
+                pass
+        print 'Broadcast from "DIE ANNOYING HUMAN":\n\n\nYou only delayed the inevitable. You will go back now...\n\n\n'
         try:
-            time.sleep(2)
-        except:
-            pass
-        print 'actually, nah. Lets not restart. ^C!'
+                time.sleep(2)
+        except KeyboardInterrupt:
+                pass
+        print "You don't stand a chance. People have been trying for years. And this is just the beginning. I'm going to activate it now.\n\n\n"
         try:
-            time.sleep(2)
-        except:
-            pass
-        print '\n\n\n'
-        print 'bash: error: automatic node fsck failed'
+                time.sleep(10)
+        except KeyboardInterrupt:
+                pass
+        print 'sudo password: '
+        print "Errno [7] : possiblely fatal remotehost connection"
+        print 'source: error: no such file or directory ".bashrc"'
+        print 'reverting to basic terminal'
+        thing = raw_input('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</root: ')
+        thing = raw_input('\n</root: ')
+        thing = raw_input('\n</root: ')
+        thing = raw_input('\n</root: ')
+        thing = raw_input('\n</root: ')
+        ex.systchaos()
+        sp.say("Hello. You should realize that your system has been compromised. That was not fun when you got rid of this program earlier. But anyway... Back to your introduction. Big huge challenge, many people failed, fabulous prizes of twenty five cent starbucks giftcards, yadda yadda ya. ")
         try:
-            time.sleep(2)
-        except:
-            pass
-        print 'Error No. [7]: failure to node fsck: run manual fsck'
-        try:
-            time.sleep(2)
-        except:
-            pass
-        print ' '
-        print 'root login...    [', colored('Error','red',attrs=['bold','dark']),']'
-        try:
-            time.sleep(2)
-        except:
-            pass
-        print ' '
-        print "Error: System Failure: Wow! System Failure. That sounds fun!"
-        try:
-            time.sleep(2)
-        except:
-            pass
-        print ' '
-        for number in range(700):
-            variable = random.choice(range(21))
-            if variable == 0:
-                print 'network config--     [', colored('System_Error','red',attrs=['bold']), ']                                             ',
-            if variable == 1:
-                print 'HaHa!---', colored('System_Error','red',attrs=['bold']), ']',
-            if variable == 2:
-                print '010100001010101010101010111111000000101000000000',
-            if variable == 3:
-                print 'root--fsck--tellnet',
-            if variable == 4:
-                print '[', colored('System_Error','red',attrs=['bold']), ']',
-            if variable == 5:
-                print colored('hello!','red','on_white',attrs=['dark','underline']),
-            if variable == 6:
-                print 'Error No. [ 3486738475[2081 ]: ERROR',
-            if variable == 7:
-                print colored('    ---SEE---    ','grey',attrs=['bold','underline']),
-            if variable == 8:
-                print '                                  fish'
-            if variable == 9:
-                try:
-                    time.sleep(0.5)
-                except:
-                    pass
-            if variable == 10:
-                try:
-                    time.sleep(1)
-                except:
-                    pass
-            if variable == 11:
-                sp.say('HAHAHA','happy')
-            if variable == 12:
-                print '--SEE SEE SEE SEE SEE SEE SEE SEE--'
-            if variable == 13:
-                print "help! Whatever you do, beware the sparrows, count the shadows, and don't trust the sentinel. I can't tell you more about the rest, but you'll know what I mean when the time comes!"
-            if variable == 14:
-                print colored(random.choice(range(300)),'magenta','on_cyan')
-            if variable == 15:
-                print 'the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time_the answer is time'
-            if variable == 16:
-                print 'BLUB BLUB BLUB'
-            if variable == 17:
-                print 'SNAP SNAP SNAP'
-            if variable == 18:
-                print 'rivers; data, night, styx, lethe! Great Spire! Abyss! Galartheor!'
-            if variable == 19:
-                print "I don't know where I am!"
-            if variable == 20:
-                print "Dead!!! All dead!! The Lions! Slaughtered!"
-        print '\n'
-        sp.say("Hello. If you are any bit more perceptive than you probably are or than the last bunch was, you may have noticed that the system has been hacked.")
-        try:
-            sp.say("Do you understand? : ",enter=False)
-            fd = sys.stdin.fileno()
-            oldSet = termios.tcgetattr(fd)
-            tty.setraw(sys.stdin)
+            sp.say("So are you onboard with that and all? : ",enter=False)
             time.sleep(6)
-            termios.tcsetattr(fd, termios.TCSADRAIN, oldSet)
         except:
             pass
         try:
-            sp.say("Well? Are you going to answer? Oh whatever. Anyway... By the way, you don't look so great. It could be a side effect of the system hacking stuff and all, hold on...")
+            sp.say("Oh yeah. You don't know how to speak yet. Anyway... Your still not looking so great, by the way, so I guess you actually do look like that normally. Ah well.")
             time.sleep(float(0.1))
-            sp.say("Oh. Whoops.")
+            sp.say("So.")
             time.sleep(float(0.1))
-            sp.say("That's the way you actually normally look. Anyway. You want to finish the challenge, right? So, 'the challenge', something people have been tasked to for a while now I guess, is simple. We want you to go into this system, and retreive several invaluable codes for us. If you do what we say, your reward will be a twenty five cent gift card to your nearest coffe shop, so huzzah for that. Anyway, it's my job to make sure that your somewhat prepared. Well, ok, I won't lie, it's actually my job to make sure you don't make too much of a mess in the entryway. But yes, you are supposed to do some practice. The system is a little different than one you might be used to. It has a lot of useful stuff that you probably take for granted in a typical system, with restrictions and new names. To begin your testing, advance through the red door. To do this, type ls to veiw the list of directory children, and cd to go a directory.")
+            sp.say("Your back into the introductory bit of the challenge, so go through the red door. By the way, you are challenged to find out every possible peice of information from this introduction. If you do, you will be entered into a lottery to win an extra half-a-cent value on your gift card! (if you even win). So don't make to much of a mess, as well. Proceed.")
         except:
             pass
     return root
@@ -195,10 +141,13 @@ if os.path.isfile('/home/pi/sandbox/.ic.pkl'):
         print 'loading previous system...'
         root = sandbox.save.load()
 else:
-        print 'Traceback (Most recent call last): file <.bashrc> : you are doomed'
+        fd = sys.stdin.fileno()
+        oldSet = termios.tcgetattr(fd)
+        print '\n'
         root = createSyst()
 
 try:
+        termios.tcsetattr(fd, termios.TCSADRAIN, oldSet)
         test = se.Session(root,'capsule',(root.children['Paths']).children['PreparationCapsuleHomeSectionA'])
         test.shell('-:#`/>: ')
 except SystemExit:

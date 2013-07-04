@@ -72,7 +72,7 @@ sg6
 I00
 sS'done'
 p21
-I00
+I01
 sg7
 I01
 sg8

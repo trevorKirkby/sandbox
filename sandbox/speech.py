@@ -42,6 +42,7 @@ def isIn(text,meaning):
         return found
 
 def say(text,mood='norm',enter=True):
+                timed = None
                 text = textwrap.fill(text,75)
                 if mood == 'norm':
                         text = colored(text,'yellow',attrs=['bold'])
@@ -55,12 +56,22 @@ def say(text,mood='norm',enter=True):
                         text = colored(text,'white',attrs=['bold'])
                 if mood == 'sad':
                         text = colored(text,'grey',attrs=['bold'])
+                elif mood == 'rand':
+                        nText = []
+                        for letter in text:
+                                thing = random.choice(['red','blue','green','yellow','white','grey','cyan','magenta'])
+                                nText.append(colored(letter,str(thing),attrs=['bold']))
+                        text = ''.join(nText)
+                        timed = 0.01
                 fd = sys.stdin.fileno()
                 oldSet = termios.tcgetattr(fd)
                 tty.setraw(sys.stdin)
                 for word in text:
-		        randthing = random.random()
-		        randVariable = float(randthing/7)
+		        if timed == None:
+		                randthing = random.random()
+		                randVariable = float(randthing/7)
+                        else:
+		                randVariable = timed
                         if word == '\n':
                                 termios.tcsetattr(fd, termios.TCSADRAIN, oldSet)
                                 print '\n',
