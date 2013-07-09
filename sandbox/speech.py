@@ -46,15 +46,15 @@ def say(text,mood='norm',enter=True):
                 text = textwrap.fill(text,75)
                 if mood == 'norm':
                         text = colored(text,'yellow',attrs=['bold'])
-                if mood == 'angry':
+                elif mood == 'angry':
                         text = colored(text,'red',attrs=['bold'])
-                if mood == 'happy':
+                elif mood == 'happy':
                         text = colored(text,'green',attrs=['bold'])
-                if mood == 'scared':
+                elif mood == 'scared':
                         text = colored(text,'magenta',attrs=['bold'])
-                if mood == 'excited':
+                elif mood == 'excited':
                         text = colored(text,'white',attrs=['bold'])
-                if mood == 'sad':
+                elif mood == 'sad':
                         text = colored(text,'grey',attrs=['bold'])
                 elif mood == 'rand':
                         nText = []
@@ -144,3 +144,49 @@ def askreply():
 
 def talk():
         pass
+
+def config():
+        pass
+
+#gprint termcolor.cprint('hello how are you','red','on_white',attrs=['bold','dark','underline','reverse'])
+
+class state():
+        #responsedict can contain specific config modifiers using setattribute. They just send setattribute(statename.attributename,newattribute)
+        def __init__(self,question,responsedict,defaultconfig,configmodifiers,automodifiers):
+                self.question = question
+                self.responses = responsedict
+                self.default = defaultconfig
+                self.default += config modifers
+                #once config is properly made, there won't be a self.default, there'll be an unpacked set of colors etc. config modifers are manually added. automodifiers are automatically added to represent mood change, thought they can be turned off
+        def activate():
+                answer = ask(self.question)
+                
+        def setattribute(attribute,new):
+                attribute = new
+
+'''
+
+SPEECH OUTLINE
+
+lang:
+
+yes: 
+no: 
+choice [number/letter]: not [number/letter]
+you: 
+I: 
+name: {name}
+etre(all of them):
+possible is adjectives:
+
+
+grapes: wet raisins
+raisins: dried grapes
+
+defs:
+
+config()
+        takes any specific inclanations towards and against names, I's, and You's, takes questions it will ask and how it responds(in a treebuilder parsing stringthing), takes overall responses, takes specific phrase responses (there aren't many words you may freely combine, mind you), takes specified insult responses and general personality insult responses(in this lang), takes speech color settings for small individual AIs(bigger ones have there own class for that, and the smaller ones do have a default and all)
+        Actually, scratch that. config just does general sets, most of which were listed. Then, a different def creates conversation states. This allows one question/wait/replies thing to direct to other states according to what you say. States are ordered more or less chronologically, by convention. There will also be an in state function to return anything the executable will have to do other than printing. (that includes moving things, changing permissions, granting access, et cetera. there will be a parser waiting on the other side that will execute something like mv in more complicated lowlevel scripting). Obviously, a conversation capsule is a class, whereas config creates a variable containing all the base config any other speech function will want to see (and as i said, all programs have a default config, the bigger ones even have unique defaults.)
+
+'''

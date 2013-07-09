@@ -7,6 +7,12 @@ import math
 import random
 import speech as s
 
+#ON GREY HIGHLIGHT CONVEALED IMAGE!!!! HAH!
+
+
+
+
+
 class gProg(ex.program):
         def __init__(self,name):
                 ex.program.__init__(self,name)
@@ -26,6 +32,7 @@ class gProg(ex.program):
                 #out of 1,000
                 self.memory = 700
                 self.persons = ['default','megalomaniac','uberDrama','stupid/borderlineStoned','genius','hyperAngry','spazzy','passiveAgressive','theta']
+                #all personalities other than default are only available in II
                 self.personalityBubble = self.persons[0]
                 self.STIPM = None
                 self.comments = {}
@@ -126,6 +133,29 @@ class gProg(ex.program):
         def greply(feild,hear,reply,timewait,voice='standard'):
                 self.autoprint(s.reply(feild,hear,reply),timewait,voice)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class samplePrinter(gProg):
         def __init__(self):
                 gProg.__init__(self,'samplePrinter')
@@ -198,3 +228,7 @@ class program(gProg):
                 #self.greply(question,'daytime',"",3,'')
                 #self.greply(question,'information',"",3,'')
                 #self.greply(question,'help',"",3,'')
+
+
+
+

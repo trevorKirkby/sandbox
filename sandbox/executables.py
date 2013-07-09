@@ -77,6 +77,30 @@ class Person(program):
                 return variable
                 
 
+class dog():
+        pass
+
+#order of schedule:
+#make/rebuild EZspeech programs(with the lang hardcoded into a def to config how it will act)
+#make EZexec programs
+#rebuild galartheor
+#make an intermediary class for largish characters(contained often in two classes, like galartheor, make a class that holds the two classes)
+#create synthsynthshell(sss)
+#add pi imgdisplay to look functioning
+#build chaos shell
+#build hacksynth
+#build exceptions manager
+#build boatnav
+#build combat
+#build labrynth
+#build caves
+#adapt flightsim
+#build war(utilizing all of the above, with some individual human attention for strategy and outcome, and a lot of semisimulated war(semisimulated becuase the eagle allows you to do a lot more, and so it is not just a simulated outcome in the bg. if you lose the uprising, you can always assassinate galartheor... plus, chamelions here cannot die, so your allies are just imprisoned.))
+#build treebuild parser
+#build galartheor semi-on-the-fly libraries and plot outlining
+#build intermediary void challenge
+#build S.E.E.
+
 '''
 class doorway(path):
         #locks is a string of 'PassCode','KeyObj','Qst','Persuade',or 'none'. default = 'none', is a list so can be more barriers though

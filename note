@@ -1,0 +1,7 @@
+import time
+print time.asctime()
+
+
+import readline
+#replace_history_item(	pos, line)
+#this could be interesting in challenge type the right thing and in up arrow history it changes, could be a message, a command, a key, or it could be an impediment or a trap.
