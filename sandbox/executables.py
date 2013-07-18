@@ -10,6 +10,8 @@ import sys
 import tty
 import termios
 
+tty.setraw(sys.stdin)
+
 class program(fs.Node):
         def __init__(self,name,permissions = 'x'):
                 fs.Node.__init__(self,name,permissions)

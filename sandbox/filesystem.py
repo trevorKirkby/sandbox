@@ -265,3 +265,8 @@ class Notebook(obj):
                             self.contents = item
                         else:
                             self.contents.append(variable)
+
+
+import subprocess
+
+subprocess.call(['touch','/','.true'])

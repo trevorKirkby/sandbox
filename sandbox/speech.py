@@ -14,6 +14,7 @@ def isIn(text,meaning):
         #base formatting for common instances, like that is good, that's good
         #base phrase equivalents, like shut up, be quiet
         #base understanding of the concept of the double negative, like that is good, that's not bad(which will return a false, when usually no trigger returns none)
+        #This is rendered useless for the challenge, but it could be used elsewhere
         findIn = text.split()
         findWhat = meaning.split()
         index = 0
@@ -42,6 +43,7 @@ def isIn(text,meaning):
         return found
 
 def say(text,mood='norm',enter=True):
+                #timing and img
                 timed = None
                 text = textwrap.fill(text,75)
                 if mood == 'norm':
@@ -138,7 +140,7 @@ def reply(qname,say,reply,returnBool=True,directedAt='me',reverseBool=False):
         else:
                 print 'Error: Speech: Reply Function: Specify a True or False reverse boolean'
                 raise KeyboardInterrupt
-
+'''
 def askreply():
         pass
 
@@ -147,22 +149,51 @@ def talk():
 
 def config():
         pass
-
+'''
 #gprint termcolor.cprint('hello how are you','red','on_white',attrs=['bold','dark','underline','reverse'])
 
+class word():
+        def __init__(self,text,magnitude,timing,color):
+                self.text = text
+                self.magnitude = magnitude
+                self.timing = timing
+                self.color = color
+
+def write(words,defaultconfig,modconfig,autoconfig,askbool=False):
+        if askbool == True:
+                ask(words)
+        else:
+                say(words)
+        #this will use all of the stuff to state or ask things according to the correct configurations.
+                #The idea of a class word is that it keeps a very specific library of words and basic responses, etc. along with default timings and colorizations for saying them, along with varying degrees of dominance to determine speech colorization and general rythm is best...
+
+def config(color='default',insults=None,universalreplies=[],formatmodifiers=None,img=None,accent='default'):
+        return [color,universalreplies,insults,formatmodifiers,image,accent]
+
 class state():
-        #responsedict can contain specific config modifiers using setattribute. They just send setattribute(statename.attributename,newattribute)
         def __init__(self,question,responsedict,defaultconfig,configmodifiers,automodifiers):
                 self.question = question
                 self.responses = responsedict
+                #info stored in default (in order of index): termcolor modifier(speech.ask() needs to be able to take actual termcolor stuff as well as adjectives), all-of-converation replies, insult sending values, formattingmodifiers, image(=None), 'accent'
                 self.default = defaultconfig
-                self.default += config modifers
-                #once config is properly made, there won't be a self.default, there'll be an unpacked set of colors etc. config modifers are manually added. automodifiers are automatically added to represent mood change, thought they can be turned off
+                if configmodifiers != None:
+                        index = 0
+                        for thing in configmodifiers:
+                                if thing != None:
+                                        self.default[index] = thing
+                                index += 1
+                if automodifiers != None:
+                        index = 0
+                        for thing in automodifiers:
+                                if thing != None:
+                                        self.default[index] = thing
+                                index += 1
         def activate():
-                answer = ask(self.question)
-                
-        def setattribute(attribute,new):
-                attribute = new
+                answer = ask(self.question,self.default[0])
+                try:
+                        return (self.responses[answer])[1]
+                except KeyError:
+                        return (self.responses["other"])[1]
 
 '''
 
