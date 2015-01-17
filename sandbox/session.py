@@ -199,11 +199,7 @@ class Session:
 					else:
 						pass
 				node = self.find(argv[1])
-				if not node.isDir():
-					print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
-				elif node.isPassage == None:
-					print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
-				elif node.isExc():
+				if node.isExc():
 					if node.execute2 == False:
 						print self.name, ': exc: You do not have execute permissions for this node'
 						return
@@ -217,9 +213,14 @@ class Session:
 						pass
 					if self.mini == True and passing == 'end':
 						raise SystemExit
+					return
+				if not node.isDir():
+					print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
+				elif node.isPassage == None:
+					print '%s: %s: %s: Not a directory' % (self.name,argv[0],argv[1])
 				else:
 					if node.execute2 == False:
-						print self.name, ": cd: You do not have execute permissions to cd into this directory."
+						print self.name, ": cd: You do not have execute permissions to cd to this location."
 					else:
 						if node.isAutoExc():
 							node.execute()
