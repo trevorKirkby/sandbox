@@ -738,7 +738,7 @@ class chest2(objHold):
 
 class doorA(path):
 		def __init__(self):
-				path.__init__(self,'Divine_Hatchway','Do tell, why are you standing and looking around? You are presently wedged in the remains of an exploded hatchway. Move along, sheesh.')
+				path.__init__(self,'Divine_Hatchway','Do tell, why are you standing and looking around? You are presently wedged in a hatchway. Move along, sheesh.')
 				self.exploded = False
 				self.angry = int(0) #overloads after being insulted 539 times... lol.
 		def execute(self):
@@ -773,3 +773,25 @@ class doorA(path):
 						return True
 		def color(self):
 				return colored('Divine_Hatchway','white',attrs=['bold'])
+
+class doorB(path):
+		def __init__(self):
+				path.__init__(self,'Airlock','A clearing with an electronic, airtight doorway.')
+				self.open = False
+		def execute(self):
+				if self.open == False:
+						speech.say("Hello. I am afraid you are not granted access to this local sector of SEE. Fortunately for you, however, you can presently earn access. Simply solve this conondrum.")
+						answer = speech.ask("What is the mathematical significance of the number 823543? This should be a numeric response, you will know what it is when you find it. The number is *probably* and integer, and *probably* less than 4 digits. Enter : ")
+						if answer == '7':
+								speech.say("The number 823543 is seven to the seventh power. Hence, this number has a particularly remarkable association with seven.")
+								speech.say("Correct. You are granted access to this sector of SEE.")
+								self.open = True
+								return True
+						elif answer == '49':
+								speech.say("Close.")
+								return None
+						else:
+								speech.say('Unfortunately you are incorrect.')
+								return None
+				else:
+						return True
