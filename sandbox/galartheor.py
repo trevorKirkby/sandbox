@@ -7,15 +7,10 @@ import math
 import random
 import speech as s
 
-#ON GREY HIGHLIGHT CONVEALED IMAGE!!!! HAH!
+#ON GREY HIGHLIGHT CONCEALED IMAGE!!!! HAH!
 
-
-
-
-
-class gProg(ex.program):
+class Galartheor(ex.program):  #This is a class that will have a single instance, governing the collective state of all of galartheor
         def __init__(self,name):
-                ex.program.__init__(self,name)
                 #the below variables were be slowly integrated into working programs. this program group meant to represent a large computerized entity will not be added into the program, which can be changed as it is played, until it is completely complete and fully integrated with helpful methods to easily build this AI
                 self.activated = False
                 self.anger = 0
@@ -34,10 +29,17 @@ class gProg(ex.program):
                 self.persons = ['default','megalomaniac','uberDrama','stupid/borderlineStoned','genius','hyperAngry','spazzy','passiveAgressive','theta']
                 #all personalities other than default are only available in II
                 self.personalityBubble = self.persons[0]
-                self.STIPM = None
+                self.STIPM = []
                 self.comments = {}
                 self.commentsLocation = 0
                 #remember- add a taunt instances program to give pre-typed taunts according to performance on the fly and according to mood, and an autotaunt piped through autoprint that gives a taunt depending on mood(some taunts are just your dumb some are more amusing)
+                ex.program.__init__(self,name)
+
+GALARTHEOR = Galartheor("Galartheor")
+
+class gProg(ex.program):  #This is a class that will allow pieces of galartheor to manifest, with handy speech aids.
+        def __init__(self,name):
+                ex.program.__init__(self,name)
         def wordByWordPrint(self,text,waitTime=2):
                 for word in text:
 		        randthing = random.random()
@@ -128,31 +130,10 @@ class gProg(ex.program):
                 else:
                         return self.wordByWordPrint(self.gprint(text,adj=dprint),timewait)
         def remember(self,variable):
-                self.STIPM = variable
+                GALARTHEOR.STIPM.append(variable)
                 #short term inter program memory
         def greply(feild,hear,reply,timewait,voice='standard'):
                 self.autoprint(s.reply(feild,hear,reply),timewait,voice)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -208,7 +189,7 @@ class program(gProg):
                 self.greply(question,'dumb',"I am a very sophisticated program. I am not 'dumb'.",3,'annoyed')
                 self.greply(question,'where',"I am not telling you where anything is. You are supposed to explore",3,'standard')
                 self.greply(question,'what',"I have no good reason to answer your question.",3,'standard')
-                self.greply(question,'how',"There is no logical cause for you to ask a question involving how. I will not answer this.",3,'annoyed')
+                self.greply(question,'how',"How does not concern you.",3,'annoyed')
                 self.greply(question,'who',"I am not going to answer that question.",3,'standard')
                 self.greply(question,'when',"what are you asking that for? when? no.",3,'standard')
                 #self.greply(question,'',"",3,'')

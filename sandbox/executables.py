@@ -735,3 +735,41 @@ class chest2(objHold):
 				self.done = True
 				speech.say("You may access the contents of this chest, beginner contestant. Good luck on the challenge, you will really, really need it...")
 				return True
+
+class doorA(path):
+		def __init__(self):
+				path.__init__(self,'Divine_Hatchway','Do tell, why are you standing and looking around? You are presently wedged in the remains of an exploded hatchway. Move along, sheesh.')
+				self.exploded = False
+				self.angry = int(0) #overloads after being insulted 539 times... lol.
+		def execute(self):
+				if self.exploded == False:
+						speech.say("Starting security and greeting protocol... Hello. Whatever it is you are here for, you have to give the right pass key.")
+						answer = speech.ask("Please enter the correct key to pass. To leave without answering, enter 'a'. To call for assistance, enter 'b'. To call this security and greeting system moronic, enter 'c'. Code: ")
+						if answer == 'a':
+								speech.say("Right then. Bye for now.")
+								return None
+						elif answer == 'b':
+								speech.say("Requesting assistance... Please standby while a help force is deployed.")
+								return None
+						elif answer == 'c':
+								if self.angry <= 539:
+										self.angry += 1
+										speech.say("Incorrect. I am sure you didn't mean it.")
+										speech.say("You've done that "+self.angry+" times now.")
+										return None
+								else:
+										speech.say("Right that's it! You jerk.","angry")
+										speech.say("Warning: Stability alert. Critical overload. Shutting down.")
+										speech.say("SCREW YOU REGULATOR!","angry")
+										speech.say("Warning: Safeties disabled.")
+										speech.say("NOW! I AM NOT FINISHED WITH YOU! YOU THINK THAT JUST BECAUSE I AM A DOOR I CAN'T DO ANYTHING?!! I AM GOING TO BEAT YOU UP! YOU MORON!!! AAARRGH!!!","angry")
+										print "The door critically overloads. When the smoke clears a crater is left."
+										self.exploded = True
+										return False
+						else:
+								speech.say('Incorrect.')
+								return None
+				else:
+						return True
+		def color(self):
+				return colored('Divine_Hatchway','white',attrs=['bold'])
